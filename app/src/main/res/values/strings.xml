@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">TapReaction</string>
+    <string name="current_result">"Current result is "</string>
+    <string name="best_result_is">"Best average result is: "</string>
+    <string name="button_text">Tap!</string>
+    <string name="time_before_start">"Countdown: "</string>
+    <string name="start_tapping">Let`s TAP!!!</string>
+    <string name="sec_for_current_result">" sec."</string>
+    <string name="current_average_result">"Current average result is: "</string>
+    <string name="current_average_result_null"/>
+</resources>
