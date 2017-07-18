@@ -8,11 +8,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 public class GameActivity extends AppCompatActivity {
-
 
     Button mButton0;
     Button mButton1;
@@ -33,26 +34,27 @@ public class GameActivity extends AppCompatActivity {
     long mInvisibleMoment;
 
     CountDownTimer mTimerBeforeStart;
+
     public static final int REMAIN_TIME = 4000;
+    private static final int NUMBER_OF_TRIES = 5;
 
     Random mRandom = new Random();
 
     private static int clicksCount = 0;
 
-    private static final int NUMBER_OF_TRIES = 5;
-    double[] mTimesOfReaction = new double[NUMBER_OF_TRIES];
+    ArrayList<Double> mTimesOfReaction = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         initViews();
+        startTimer(REMAIN_TIME);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        startTimer(REMAIN_TIME);
     }
 
     private void initViews() {
@@ -75,9 +77,9 @@ public class GameActivity extends AppCompatActivity {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     buttonIsInvisible(button);
                     mCurrentResult.setText(getText(R.string.current_result)
-                            + timeCount(mVisibleMoment, mInvisibleMoment)
+                            + formattedTimeCount(timeCount(mVisibleMoment, mInvisibleMoment))
                             + getString(R.string.sec_for_current_result));
-                    startTimer(0);
+                    showButton();
                 }
                 return false;
             }
@@ -91,11 +93,13 @@ public class GameActivity extends AppCompatActivity {
         return seconds;
     }
 
-    //Расчет времени реакции на нажатие случайной кнопки
-    private String timeCount(long visibleMoment, long invisibleMoment) {
-        double timeInSeconds = ((invisibleMoment - visibleMoment) * 1.0 / 1000);
-        String formattedDouble = String.format("%.3f", timeInSeconds);
-        return formattedDouble;
+    //Расчет времени реакции от появления кнопки до нажатия на нее
+    private double timeCount(long visibleMoment, long invisibleMoment) {
+        return (invisibleMoment - visibleMoment) * 1.0 / 1000;
+    }
+
+    private String formattedTimeCount(double time){
+        return String.format("%.3f", time);
     }
 
     //Временная матка, когда кнопка повилась
@@ -149,20 +153,35 @@ public class GameActivity extends AppCompatActivity {
 
     //Таймер перед запуском
     private void startTimer(long time) {
-        if (clicksCount < NUMBER_OF_TRIES) {
-            mTimerBeforeStart = new CountDownTimer(time, 1000) {
-                public void onTick(long millisUntilFinished) {
-                    mTimer.setText(getText(R.string.time_before_start).toString() + millisUntilFinished / 1000 + "");
-                }
+        mTimerBeforeStart = new CountDownTimer(time, 1000) {
+            public void onTick(long millisUntilFinished) {
+                mTimer.setText(getText(R.string.time_before_start).toString() + millisUntilFinished / 1000 + "");
+            }
 
-                public void onFinish() {
-                    mTimer.setText(R.string.start_tapping);
-                    selectRandomButton(generateRandom());
-                    actionViews(mRandomButton);
-                }
-            }.start();
-            mTimesOfReaction[clicksCount] = Double.valueOf(timeCount(mVisibleMoment, mInvisibleMoment));
+            public void onFinish() {
+                mTimer.setText(R.string.start_tapping);
+                showButton();
+            }
+        }.start();
+    }
+
+    private void showButton() {
+        if (clicksCount < NUMBER_OF_TRIES) {
+            selectRandomButton(generateRandom());
+            actionViews(mRandomButton);
+            mTimesOfReaction.add(timeCount(mVisibleMoment, mInvisibleMoment));
+            mBestResult.setText(mTimesOfReaction.get(clicksCount) + "");
             clicksCount++;
-        } else finish();
+        } else {
+            //должно выводиться среднее время
+        }
+    }
+
+    private String calculateAverageTime(ArrayList<Double> list) {
+        double sumOfTimes = 0;
+        for (int i = 0; i < list.size(); i++) {
+            sumOfTimes = sumOfTimes + list.get(i);
+        }
+        return String.format("%.3f", sumOfTimes);
     }
 }
