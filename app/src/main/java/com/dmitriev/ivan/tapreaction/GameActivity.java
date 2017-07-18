@@ -169,19 +169,21 @@ public class GameActivity extends AppCompatActivity {
         if (clicksCount < NUMBER_OF_TRIES) {
             selectRandomButton(generateRandom());
             actionViews(mRandomButton);
-            mTimesOfReaction.add(timeCount(mVisibleMoment, mInvisibleMoment));
-            mBestResult.setText(mTimesOfReaction.get(clicksCount) + "");
+            mTimesOfReaction.add(clicksCount * 1.0); //Проверка. Почему-то не сохранятеся время
+
             clicksCount++;
         } else {
             //должно выводиться среднее время
+            mBestResult.setText(calculateAverageTime(mTimesOfReaction));
         }
     }
 
+    //Этот метод работает!!!!!! Не трогать!!!
     private String calculateAverageTime(ArrayList<Double> list) {
         double sumOfTimes = 0;
         for (int i = 0; i < list.size(); i++) {
             sumOfTimes = sumOfTimes + list.get(i);
         }
-        return String.format("%.3f", sumOfTimes);
+        return String.format("%.3f", sumOfTimes / list.size());
     }
 }
