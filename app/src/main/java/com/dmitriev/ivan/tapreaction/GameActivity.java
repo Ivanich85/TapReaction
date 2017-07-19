@@ -36,7 +36,7 @@ public class GameActivity extends AppCompatActivity {
 
     private static final int REMAIN_TIME = 3100;
     private static final int BUTTONS_QUANTITY = 9;
-    private static final int NUMBER_OF_TRIES = 4;
+    private static final int NUMBER_OF_TRIES = 10;
 
     Random mRandom = new Random();
 
@@ -97,6 +97,7 @@ public class GameActivity extends AppCompatActivity {
         return (invisibleMoment - visibleMoment) / 1000.0;
     }
 
+    //Отформатированное время
     private String formattedTimeCount(double time) {
         return String.format("%.3f", time);
     }
@@ -199,6 +200,7 @@ public class GameActivity extends AppCompatActivity {
         return (sumOfTimes / list.size());
     }
 
+    //Отформатированное среднее значение
     private String formattedCalculateAverageTime(double averageTime) {
         return String.format("%.3f", averageTime);
     }
