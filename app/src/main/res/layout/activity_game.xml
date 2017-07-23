@@ -40,7 +40,8 @@
                 android:text="@string/button_text"
                 android:textAllCaps="false"
                 android:layout_weight="1"
-                android:visibility="invisible"/>
+                android:visibility="invisible"
+                android:background="@drawable/mosquito"/>
 
             <Button
                 android:id="@+id/tap_button_1"
@@ -49,15 +50,17 @@
                 android:text="@string/button_text"
                 android:textAllCaps="false"
                 android:layout_weight="1"
-                android:visibility="invisible"/>
+                android:visibility="invisible"
+                android:background="@drawable/mosquito"/>
 
             <Button
                 android:id="@+id/tap_button_2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/mosquito"
                 android:text="@string/button_text"
                 android:textAllCaps="false"
-                android:layout_weight="1"
                 android:visibility="invisible"/>
 
         </LinearLayout>
@@ -76,7 +79,8 @@
                 android:text="@string/button_text"
                 android:textAllCaps="false"
                 android:layout_weight="1"
-                android:visibility="invisible"/>
+                android:visibility="invisible"
+                android:background="@drawable/mosquito"/>
 
             <Button
                 android:id="@+id/tap_button_4"
@@ -85,7 +89,8 @@
                 android:text="@string/button_text"
                 android:textAllCaps="false"
                 android:layout_weight="1"
-                android:visibility="invisible"/>
+                android:visibility="invisible"
+                android:background="@drawable/mosquito"/>
 
             <Button
                 android:id="@+id/tap_button_5"
@@ -94,7 +99,8 @@
                 android:text="@string/button_text"
                 android:textAllCaps="false"
                 android:layout_weight="1"
-                android:visibility="invisible"/>
+                android:visibility="invisible"
+                android:background="@drawable/mosquito"/>
 
         </LinearLayout>
 
@@ -112,7 +118,8 @@
                 android:text="@string/button_text"
                 android:textAllCaps="false"
                 android:layout_weight="1"
-                android:visibility="invisible"/>
+                android:visibility="invisible"
+                android:background="@drawable/mosquito"/>
 
             <Button
                 android:id="@+id/tap_button_7"
@@ -121,7 +128,8 @@
                 android:text="@string/button_text"
                 android:textAllCaps="false"
                 android:layout_weight="1"
-                android:visibility="invisible"/>
+                android:visibility="invisible"
+                android:background="@drawable/mosquito"/>
 
             <Button
                 android:id="@+id/tap_button_8"
@@ -130,7 +138,8 @@
                 android:text="@string/button_text"
                 android:textAllCaps="false"
                 android:layout_weight="1"
-                android:visibility="invisible"/>
+                android:visibility="invisible"
+                android:background="@drawable/mosquito"/>
 
         </LinearLayout>
     </LinearLayout>
