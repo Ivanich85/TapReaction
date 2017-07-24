@@ -23,7 +23,8 @@
         android:layout_height="0dp"
         android:gravity="center"
         android:layout_weight="7"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@drawable/mainbackround_new">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -36,7 +37,6 @@
                 android:id="@+id/tap_button_0"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/button_text"
                 android:textAllCaps="false"
                 android:layout_weight="1"
                 android:visibility="invisible"
@@ -46,7 +46,6 @@
                 android:id="@+id/tap_button_1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/button_text"
                 android:textAllCaps="false"
                 android:layout_weight="1"
                 android:visibility="invisible"
@@ -58,7 +57,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/mosquito"
-                android:text="@string/button_text"
                 android:textAllCaps="false"
                 android:visibility="invisible"/>
 
@@ -75,7 +73,6 @@
                 android:id="@+id/tap_button_3"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/button_text"
                 android:textAllCaps="false"
                 android:layout_weight="1"
                 android:visibility="invisible"
@@ -85,7 +82,6 @@
                 android:id="@+id/tap_button_4"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/button_text"
                 android:textAllCaps="false"
                 android:layout_weight="1"
                 android:visibility="invisible"
@@ -95,7 +91,6 @@
                 android:id="@+id/tap_button_5"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/button_text"
                 android:textAllCaps="false"
                 android:layout_weight="1"
                 android:visibility="invisible"
@@ -114,7 +109,6 @@
                 android:id="@+id/tap_button_6"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/button_text"
                 android:textAllCaps="false"
                 android:layout_weight="1"
                 android:visibility="invisible"
@@ -124,7 +118,6 @@
                 android:id="@+id/tap_button_7"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/button_text"
                 android:textAllCaps="false"
                 android:layout_weight="1"
                 android:visibility="invisible"
@@ -134,7 +127,6 @@
                 android:id="@+id/tap_button_8"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/button_text"
                 android:textAllCaps="false"
                 android:layout_weight="1"
                 android:visibility="invisible"
