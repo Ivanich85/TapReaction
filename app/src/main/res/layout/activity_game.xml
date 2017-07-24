@@ -149,13 +149,6 @@
             android:layout_margin="8dp"
             android:textSize="@dimen/current_result_dimen"/>
 
-        <TextView
-            android:id="@+id/current_average_result_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:text="@string/current_average_result_null"
-            android:textSize="@dimen/current_result_dimen"/>
 
         <TextView
             android:id="@+id/best_result_text_view"

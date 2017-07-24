@@ -1,6 +1,7 @@
 package com.dmitriev.ivan.tapreaction;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -37,15 +38,14 @@ public class GameActivity extends AppCompatActivity {
 
     private static final int REMAIN_TIME = 3100;
     private static final int BUTTONS_QUANTITY = 9;
-    private static final int NUMBER_OF_TRIES = 10;
+    private static final int NUMBER_OF_TRIES = 4;//Количество комаров
+    public static final String AVERAGE_RESULT = "averageResult";
 
     Random mRandom = new Random();
 
     private static int mClicksCount;
 
     ArrayList<Double> mTimesOfReaction = new ArrayList<>();
-
-    Intent mGoToResultActivityAndSentResult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +78,7 @@ public class GameActivity extends AppCompatActivity {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     buttonIsInvisible(button);
                     mCurrentResult.setText(getText(R.string.current_result)
-                            + formattedTimeCount(timeCount(mVisibleMoment, mInvisibleMoment))
+                            + formattedDouble(timeCount(mVisibleMoment, mInvisibleMoment))
                             + getString(R.string.sec_for_result));
                     double time = timeCount(mVisibleMoment, mInvisibleMoment);
                     mTimesOfReaction.add(time);
@@ -100,8 +100,8 @@ public class GameActivity extends AppCompatActivity {
         return (invisibleMoment - visibleMoment) / 1000.0;
     }
 
-    //Отформатированное время
-    private String formattedTimeCount(double time) {
+    //Отформатированное значение
+    private String formattedDouble(double time) {
         return String.format("%.3f", time);
     }
 
@@ -189,7 +189,7 @@ public class GameActivity extends AppCompatActivity {
             mClicksCount++;
         } else {
             mBestResult.setText(getText(R.string.current_average_result)
-                    + formattedCalculateAverageTime(calculateAverageTime(mTimesOfReaction))
+                    + formattedDouble(calculateAverageTime(mTimesOfReaction))
                     + getText(R.string.sec_for_result));
             sentResult();
         }
@@ -204,16 +204,10 @@ public class GameActivity extends AppCompatActivity {
         return (sumOfTimes / list.size());
     }
 
-    //Отформатированное среднее значение
-    private String formattedCalculateAverageTime(double averageTime) {
-        return String.format("%.3f", averageTime);
-    }
-
+    //Отправляем средний результат в ResultActivity
     private void sentResult() {
-        mGoToResultActivityAndSentResult.setClass(this, ResultActivity.class);
-        mGoToResultActivityAndSentResult.putExtra("awerageResult", calculateAverageTime(mTimesOfReaction));
+        Intent mGoToResultActivityAndSentResult = new Intent(GameActivity.this, ResultActivity.class);
+        mGoToResultActivityAndSentResult.putExtra(AVERAGE_RESULT, calculateAverageTime(mTimesOfReaction));
         startActivity(mGoToResultActivityAndSentResult);
     }
-
-
 }
