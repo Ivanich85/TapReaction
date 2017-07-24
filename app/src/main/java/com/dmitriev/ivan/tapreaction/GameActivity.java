@@ -1,5 +1,6 @@
 package com.dmitriev.ivan.tapreaction;
 
+import android.content.Intent;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -43,6 +44,8 @@ public class GameActivity extends AppCompatActivity {
     private static int mClicksCount;
 
     ArrayList<Double> mTimesOfReaction = new ArrayList<>();
+
+    Intent mGoToResultActivityAndSentResult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -188,6 +191,7 @@ public class GameActivity extends AppCompatActivity {
             mBestResult.setText(getText(R.string.current_average_result)
                     + formattedCalculateAverageTime(calculateAverageTime(mTimesOfReaction))
                     + getText(R.string.sec_for_result));
+            sentResult();
         }
     }
 
@@ -204,4 +208,12 @@ public class GameActivity extends AppCompatActivity {
     private String formattedCalculateAverageTime(double averageTime) {
         return String.format("%.3f", averageTime);
     }
+
+    private void sentResult() {
+        mGoToResultActivityAndSentResult.setClass(this, ResultActivity.class);
+        mGoToResultActivityAndSentResult.putExtra("awerageResult", calculateAverageTime(mTimesOfReaction));
+        startActivity(mGoToResultActivityAndSentResult);
+    }
+
+
 }
