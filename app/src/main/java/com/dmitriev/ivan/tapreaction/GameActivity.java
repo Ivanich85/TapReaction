@@ -1,7 +1,8 @@
 package com.dmitriev.ivan.tapreaction;
 
+import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
+import android.content.SharedPreferences;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -39,7 +40,7 @@ public class GameActivity extends AppCompatActivity {
     private static final int REMAIN_TIME = 3100;
     private static final int BUTTONS_QUANTITY = 9;
     private static final int NUMBER_OF_TRIES = 4;//Количество комаров
-    public static final String AVERAGE_RESULT = "averageResult";
+    protected static final String AVERAGE_RESULT_INTENT = "average result Intent";
 
     Random mRandom = new Random();
 
@@ -52,6 +53,7 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         initViews();
+        showBestResult();
         startTimer(REMAIN_TIME);
     }
 
@@ -77,9 +79,6 @@ public class GameActivity extends AppCompatActivity {
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     buttonIsInvisible(button);
-                    mCurrentResult.setText(getText(R.string.current_result)
-                            + formattedDouble(timeCount(mVisibleMoment, mInvisibleMoment))
-                            + getString(R.string.sec_for_result));
                     double time = timeCount(mVisibleMoment, mInvisibleMoment);
                     mTimesOfReaction.add(time);
                     showButton();
@@ -100,7 +99,7 @@ public class GameActivity extends AppCompatActivity {
         return (invisibleMoment - visibleMoment) / 1000.0;
     }
 
-    //Отформатированное значение
+    //Отформатированное значение времени реакции
     private String formattedDouble(double time) {
         return String.format("%.3f", time);
     }
@@ -188,9 +187,6 @@ public class GameActivity extends AppCompatActivity {
             actionViews(mRandomButton);
             mClicksCount++;
         } else {
-            mBestResult.setText(getText(R.string.current_average_result)
-                    + formattedDouble(calculateAverageTime(mTimesOfReaction))
-                    + getText(R.string.sec_for_result));
             sentResult();
         }
     }
@@ -207,7 +203,19 @@ public class GameActivity extends AppCompatActivity {
     //Отправляем средний результат в ResultActivity
     private void sentResult() {
         Intent mGoToResultActivityAndSentResult = new Intent(GameActivity.this, ResultActivity.class);
-        mGoToResultActivityAndSentResult.putExtra(AVERAGE_RESULT, calculateAverageTime(mTimesOfReaction));
+        mGoToResultActivityAndSentResult.putExtra(AVERAGE_RESULT_INTENT, calculateAverageTime(mTimesOfReaction));
         startActivity(mGoToResultActivityAndSentResult);
+    }
+
+    //Получаем лучший результат из Shared Preferences
+    private void showBestResult() {
+        SharedPreferences myBestResult = getSharedPreferences(ResultActivity.BEST_AVERAGE_RESULT, Context.MODE_PRIVATE);
+        float averageBestResult = myBestResult.getFloat(ResultActivity.AVERAGE_RESULT_FLOAT, 0);
+        if (averageBestResult != 0.0) {
+            mBestResult.setText(getText(R.string.best_result_is) + formattedDouble(averageBestResult)
+                    + getText(R.string.sec_for_result));
+        } else {
+            mBestResult.setText(R.string.no_best_result);
+        }
     }
 }
