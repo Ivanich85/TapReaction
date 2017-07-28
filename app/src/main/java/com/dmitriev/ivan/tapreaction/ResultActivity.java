@@ -5,12 +5,18 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class ResultActivity extends AppCompatActivity{
 
     TextView mShowResultTextView;
     TextView mBestResultTextView;
+    TextView mDifferenceBetweenResults;
+
+    Button mNewGameButton;
+    Button mExitButton;
 
     protected static final String BEST_AVERAGE_RESULT = "BEST AVERAGE RESULT";
     protected static final String AVERAGE_RESULT_FLOAT = "average result float";
@@ -27,12 +33,28 @@ public class ResultActivity extends AppCompatActivity{
     private void initViews() {
         mShowResultTextView = (TextView) findViewById(R.id.show_result_text_view);
         mBestResultTextView = (TextView) findViewById(R.id.best_result_text_view);
+        mDifferenceBetweenResults = (TextView) findViewById(R.id.difference_between_results_text_view);
+        mNewGameButton = (Button) findViewById(R.id.main_menu_button);
+        mExitButton = (Button) findViewById(R.id.exit_button);
     }
 
     private void actionViews() {
         mShowResultTextView.setText(getText(R.string.current_result) + formattedDouble(getResult())
                 + getText(R.string.sec_for_result));
         mBestResultTextView.setText(setTextForBestResult());
+        mNewGameButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToMainActivity();
+                finish();
+            }
+        });
+        mExitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     private Double getResult() {
@@ -57,30 +79,39 @@ public class ResultActivity extends AppCompatActivity{
 
     //Проверяем, лучше ли новый результат, чем предыдущий
     private boolean newBestResult(float bestResult, double currentResult, String bestAverageResult) {
-        if (bestResult != 0.0) {
+        if (bestResult != 0) {
             if (currentResult <= bestResult) {
                 savePreferences(currentResult, bestAverageResult);
+                mDifferenceBetweenResults.setText("Новый рекорд!");
             } return true;
         } else savePreferences(currentResult, bestAverageResult);
         return false;
     }
 
+    //Обновляем текст лучшего результата
     private String setTextForBestResult() {
         if (newBestResult(loadPreferences(BEST_AVERAGE_RESULT), getResult(), BEST_AVERAGE_RESULT)) {
-            return getText(R.string.best_result_is) + formattedFloat(loadPreferences(BEST_AVERAGE_RESULT))
+            return getText(R.string.best_result_is)
+                    + formattedFloat(loadPreferences(BEST_AVERAGE_RESULT))
                     + getText(R.string.sec_for_result);
         } else {
-            return getText(R.string.best_result_is) + formattedDouble(getResult())
+            return getText(R.string.best_result_is)
+                    + formattedDouble(getResult())
                     + getText(R.string.sec_for_result);
         }
     }
 
     //Сохраняем результат
-    protected double savePreferences(double bestAverageResult, String bestResult) {
+    private double savePreferences(double bestAverageResult, String bestResult) {
         SharedPreferences mBestResult = getSharedPreferences(bestResult, Context.MODE_PRIVATE);
         SharedPreferences.Editor mEditor = mBestResult.edit();
         mEditor.putFloat(AVERAGE_RESULT_FLOAT, (float)bestAverageResult);
         mEditor.apply();
         return bestAverageResult;
+    }
+
+    private void goToMainActivity() {
+        Intent mGoToMainActivity = new Intent(ResultActivity.this, MainScreenActivity.class);
+        startActivity(mGoToMainActivity);
     }
 }

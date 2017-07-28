@@ -39,7 +39,7 @@ public class GameActivity extends AppCompatActivity {
 
     private static final int REMAIN_TIME = 3100;
     private static final int BUTTONS_QUANTITY = 9;
-    private static final int NUMBER_OF_TRIES = 4;//Количество комаров
+    private static final int NUMBER_OF_TRIES = 10;//Количество комаров
     protected static final String AVERAGE_RESULT_INTENT = "average result Intent";
 
     Random mRandom = new Random();
@@ -53,7 +53,6 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         initViews();
-        showBestResult();
         startTimer(REMAIN_TIME);
     }
 
@@ -97,11 +96,6 @@ public class GameActivity extends AppCompatActivity {
     //Расчет времени реакции от появления кнопки до нажатия на нее
     private double timeCount(long visibleMoment, long invisibleMoment) {
         return (invisibleMoment - visibleMoment) / 1000.0;
-    }
-
-    //Отформатированное значение времени реакции
-    private String formattedDouble(double time) {
-        return String.format("%.3f", time);
     }
 
     //Временная матка, когда кнопка повилась
@@ -188,6 +182,7 @@ public class GameActivity extends AppCompatActivity {
             mClicksCount++;
         } else {
             sentResult();
+            finish();
         }
     }
 
@@ -200,22 +195,10 @@ public class GameActivity extends AppCompatActivity {
         return (sumOfTimes / list.size());
     }
 
-    //Отправляем средний результат в ResultActivity
+    //Переходим в Result Activity и отправляем в него средний результат
     private void sentResult() {
         Intent mGoToResultActivityAndSentResult = new Intent(GameActivity.this, ResultActivity.class);
         mGoToResultActivityAndSentResult.putExtra(AVERAGE_RESULT_INTENT, calculateAverageTime(mTimesOfReaction));
         startActivity(mGoToResultActivityAndSentResult);
-    }
-
-    //Получаем лучший результат из Shared Preferences
-    private void showBestResult() {
-        SharedPreferences myBestResult = getSharedPreferences(ResultActivity.BEST_AVERAGE_RESULT, Context.MODE_PRIVATE);
-        float averageBestResult = myBestResult.getFloat(ResultActivity.AVERAGE_RESULT_FLOAT, 0);
-        if (averageBestResult != 0.0) {
-            mBestResult.setText(getText(R.string.best_result_is) + formattedDouble(averageBestResult)
-                    + getText(R.string.sec_for_result));
-        } else {
-            mBestResult.setText(R.string.no_best_result);
-        }
     }
 }
