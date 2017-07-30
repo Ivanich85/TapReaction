@@ -1,9 +1,9 @@
 package com.dmitriev.ivan.tapreaction;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.CountDownTimer;
+import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -17,6 +17,8 @@ import java.util.Random;
 
 public class GameActivity extends AppCompatActivity {
 
+    MediaPlayer mTappedMosquito;
+
     Button mButton0;
     Button mButton1;
     Button mButton2;
@@ -26,6 +28,9 @@ public class GameActivity extends AppCompatActivity {
     Button mButton6;
     Button mButton7;
     Button mButton8;
+    Button mButton9;
+    Button mButton10;
+    Button mButton11;
     Button mRandomButton;
 
     TextView mTimer;
@@ -37,9 +42,13 @@ public class GameActivity extends AppCompatActivity {
 
     CountDownTimer mTimerBeforeStart;
 
+    private Vibrator mVibrator;
+
     private static final int REMAIN_TIME = 3100;
-    private static final int BUTTONS_QUANTITY = 9;
-    private static final int NUMBER_OF_TRIES = 10;//Количество комаров
+    private static final int BUTTONS_QUANTITY = 12;
+    private static final int NUMBER_OF_TRIES = 20;//Количество комаров
+    private static final int VIBRATION_DURING = 35;//Длительность вибрации в миллисекундах
+
     protected static final String AVERAGE_RESULT_INTENT = "average result Intent";
 
     Random mRandom = new Random();
@@ -51,6 +60,7 @@ public class GameActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mVibrator = (Vibrator)this.getSystemService(VIBRATOR_SERVICE);
         setContentView(R.layout.activity_game);
         initViews();
         startTimer(REMAIN_TIME);
@@ -66,21 +76,36 @@ public class GameActivity extends AppCompatActivity {
         mButton6 = (Button) findViewById(R.id.tap_button_6);
         mButton7 = (Button) findViewById(R.id.tap_button_7);
         mButton8 = (Button) findViewById(R.id.tap_button_8);
+        mButton9 = (Button) findViewById(R.id.tap_button_9);
+        mButton10 = (Button) findViewById(R.id.tap_button_10);
+        mButton11 = (Button) findViewById(R.id.tap_button_11);
 
         mTimer = (TextView) findViewById(R.id.timer_text_view);
         mCurrentResult = (TextView) findViewById(R.id.current_result_text_view);
         mBestResult = (TextView) findViewById(R.id.best_result_text_view);
+
+        mTappedMosquito = MediaPlayer.create(this, R.raw.trueanswer);
     }
 
-    private void actionViews(final Button button) {
+    private void actionViews(final Button button){
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                buttonIsInvisible(button);
+                double time = timeCount(mVisibleMoment, mInvisibleMoment);
+                mTimesOfReaction.add(time);
+                showButton();
+            }
+        });
+    }
+
+    private void tappedMosquitoSound(final Button button) {
         button.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    buttonIsInvisible(button);
-                    double time = timeCount(mVisibleMoment, mInvisibleMoment);
-                    mTimesOfReaction.add(time);
-                    showButton();
+                    mVibrator.vibrate(VIBRATION_DURING);
+                    mTappedMosquito.start();
                 }
                 return false;
             }
@@ -112,7 +137,7 @@ public class GameActivity extends AppCompatActivity {
 
     //Генератор случайных чисел
     private int generateRandom() {
-        return mRandom.nextInt(BUTTONS_QUANTITY);
+        return mRandom.nextInt(BUTTONS_QUANTITY - 1);
     }
 
     //Выбор кнопки на основании generateRandom()
@@ -154,6 +179,18 @@ public class GameActivity extends AppCompatActivity {
                 buttonIsVisible(mButton8);
                 mRandomButton = mButton8;
                 break;
+            case 9:
+                buttonIsVisible(mButton9);
+                mRandomButton = mButton9;
+                break;
+            case 10:
+                buttonIsVisible(mButton10);
+                mRandomButton = mButton10;
+                break;
+            case 11:
+                buttonIsVisible(mButton11);
+                mRandomButton = mButton11;
+                break;
             default:
                 mRandomButton = null;
                 break;
@@ -164,11 +201,11 @@ public class GameActivity extends AppCompatActivity {
     private void startTimer(final long time) {
         mTimerBeforeStart = new CountDownTimer(time, 1000) {
             public void onTick(long millisUntilFinished) {
-                mTimer.setText(getText(R.string.time_before_start) + (millisUntilFinished / 1000 + ""));
+                mTimer.setText(millisUntilFinished / 1000 + "");
             }
 
             public void onFinish() {
-                mTimer.setText(R.string.start_tapping);
+                mTimer.setText("");
                 showButton();
             }
         }.start();
@@ -179,9 +216,11 @@ public class GameActivity extends AppCompatActivity {
         if (mClicksCount < NUMBER_OF_TRIES) {
             selectRandomButton(generateRandom());
             actionViews(mRandomButton);
+            tappedMosquitoSound(mRandomButton);
             mClicksCount++;
         } else {
             sentResult();
+            mClicksCount = 0;
             finish();
         }
     }

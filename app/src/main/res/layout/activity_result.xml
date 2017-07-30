@@ -23,11 +23,10 @@
         android:layout_height="wrap_content"/>
 
     <Button
-        android:id="@+id/main_menu_button"
+        android:id="@+id/new_game_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/main_menu"
-        android:visibility="invisible"/>
+        android:text="@string/new_game"/>
 
     <Button
         android:id="@+id/exit_button"

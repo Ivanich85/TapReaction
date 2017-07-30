@@ -34,7 +34,7 @@ public class ResultActivity extends AppCompatActivity{
         mShowResultTextView = (TextView) findViewById(R.id.show_result_text_view);
         mBestResultTextView = (TextView) findViewById(R.id.best_result_text_view);
         mDifferenceBetweenResults = (TextView) findViewById(R.id.difference_between_results_text_view);
-        mNewGameButton = (Button) findViewById(R.id.main_menu_button);
+        mNewGameButton = (Button) findViewById(R.id.new_game_button);
         mExitButton = (Button) findViewById(R.id.exit_button);
     }
 
@@ -45,7 +45,7 @@ public class ResultActivity extends AppCompatActivity{
         mNewGameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goToMainActivity();
+                goToGameActivity();
                 finish();
             }
         });
@@ -110,8 +110,8 @@ public class ResultActivity extends AppCompatActivity{
         return bestAverageResult;
     }
 
-    private void goToMainActivity() {
-        Intent mGoToMainActivity = new Intent(ResultActivity.this, MainScreenActivity.class);
-        startActivity(mGoToMainActivity);
+    private void goToGameActivity() {
+        Intent mGoToGameActivity = new Intent(ResultActivity.this, GameActivity.class);
+        startActivity(mGoToGameActivity);
     }
 }

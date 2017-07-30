@@ -10,6 +10,6 @@
     <string name="improve_result">"Your result improved by "</string>
     <string name="worse_result">"Your result is worse by "</string>
     <string name="start_game">Start game</string>
-    <string name="main_menu">Main menu</string>
+    <string name="new_game">New game</string>
     <string name="exit_game">Exit game</string>
 </resources>

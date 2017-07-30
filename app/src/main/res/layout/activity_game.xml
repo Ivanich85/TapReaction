@@ -6,23 +6,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context="com.dmitriev.ivan.tapreaction.GameActivity"
-    android:weightSum="10">
-
-    <TextView
-        android:id="@+id/timer_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:hint="Timer"
-        android:textSize="@dimen/timer_dimen"/>
+    tools:context="com.dmitriev.ivan.tapreaction.GameActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         android:gravity="center"
-        android:layout_weight="9"
         android:orientation="vertical"
         android:background="@drawable/mainbackround_new">
 
@@ -38,29 +27,38 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textAllCaps="false"
+                android:background="@drawable/button_background"
                 android:layout_weight="1"
-                android:visibility="invisible"
-                android:background="@drawable/mosquito"/>
+                android:visibility="invisible"/>
 
             <Button
                 android:id="@+id/tap_button_1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textAllCaps="false"
+                android:background="@drawable/button_background"
                 android:layout_weight="1"
-                android:visibility="invisible"
-                android:background="@drawable/mosquito"/>
+                android:visibility="invisible"/>
 
             <Button
                 android:id="@+id/tap_button_2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@drawable/mosquito"
+                android:background="@drawable/button_background"
                 android:textAllCaps="false"
                 android:visibility="invisible"/>
 
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/timer_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="@dimen/timer_dimen"
+            android:textColor="@color/red"
+            android:textStyle="bold"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -76,7 +74,7 @@
                 android:textAllCaps="false"
                 android:layout_weight="1"
                 android:visibility="invisible"
-                android:background="@drawable/mosquito"/>
+                android:background="@drawable/button_background"/>
 
             <Button
                 android:id="@+id/tap_button_4"
@@ -85,7 +83,7 @@
                 android:textAllCaps="false"
                 android:layout_weight="1"
                 android:visibility="invisible"
-                android:background="@drawable/mosquito"/>
+                android:background="@drawable/button_background"/>
 
             <Button
                 android:id="@+id/tap_button_5"
@@ -94,7 +92,7 @@
                 android:textAllCaps="false"
                 android:layout_weight="1"
                 android:visibility="invisible"
-                android:background="@drawable/mosquito"/>
+                android:background="@drawable/button_background"/>
 
         </LinearLayout>
 
@@ -112,7 +110,7 @@
                 android:textAllCaps="false"
                 android:layout_weight="1"
                 android:visibility="invisible"
-                android:background="@drawable/mosquito"/>
+                android:background="@drawable/button_background"/>
 
             <Button
                 android:id="@+id/tap_button_7"
@@ -121,7 +119,7 @@
                 android:textAllCaps="false"
                 android:layout_weight="1"
                 android:visibility="invisible"
-                android:background="@drawable/mosquito"/>
+                android:background="@drawable/button_background"/>
 
             <Button
                 android:id="@+id/tap_button_8"
@@ -130,7 +128,43 @@
                 android:textAllCaps="false"
                 android:layout_weight="1"
                 android:visibility="invisible"
-                android:background="@drawable/mosquito"/>
+                android:background="@drawable/button_background"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="8dp"
+            android:weightSum="3">
+
+            <Button
+                android:id="@+id/tap_button_9"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textAllCaps="false"
+                android:layout_weight="1"
+                android:visibility="invisible"
+                android:background="@drawable/button_background"/>
+
+            <Button
+                android:id="@+id/tap_button_10"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textAllCaps="false"
+                android:layout_weight="1"
+                android:visibility="invisible"
+                android:background="@drawable/button_background"/>
+
+            <Button
+                android:id="@+id/tap_button_11"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textAllCaps="false"
+                android:layout_weight="1"
+                android:visibility="invisible"
+                android:background="@drawable/button_background"/>
 
         </LinearLayout>
     </LinearLayout>
@@ -159,5 +193,4 @@
             android:textSize="@dimen/best_result_dimen"/>
 
     </LinearLayout>
-
 </LinearLayout>
