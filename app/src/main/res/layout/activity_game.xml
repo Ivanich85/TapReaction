@@ -27,7 +27,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textAllCaps="false"
-                android:background="@drawable/button_background"
+                android:background="@drawable/mosquito_button_background"
                 android:layout_weight="1"
                 android:visibility="invisible"/>
 
@@ -36,7 +36,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textAllCaps="false"
-                android:background="@drawable/button_background"
+                android:background="@drawable/mosquito_button_background"
                 android:layout_weight="1"
                 android:visibility="invisible"/>
 
@@ -45,7 +45,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@drawable/button_background"
+                android:background="@drawable/mosquito_button_background"
                 android:textAllCaps="false"
                 android:visibility="invisible"/>
 
@@ -74,7 +74,7 @@
                 android:textAllCaps="false"
                 android:layout_weight="1"
                 android:visibility="invisible"
-                android:background="@drawable/button_background"/>
+                android:background="@drawable/mosquito_button_background"/>
 
             <Button
                 android:id="@+id/tap_button_4"
@@ -83,7 +83,7 @@
                 android:textAllCaps="false"
                 android:layout_weight="1"
                 android:visibility="invisible"
-                android:background="@drawable/button_background"/>
+                android:background="@drawable/mosquito_button_background"/>
 
             <Button
                 android:id="@+id/tap_button_5"
@@ -92,7 +92,7 @@
                 android:textAllCaps="false"
                 android:layout_weight="1"
                 android:visibility="invisible"
-                android:background="@drawable/button_background"/>
+                android:background="@drawable/mosquito_button_background"/>
 
         </LinearLayout>
 
@@ -110,7 +110,7 @@
                 android:textAllCaps="false"
                 android:layout_weight="1"
                 android:visibility="invisible"
-                android:background="@drawable/button_background"/>
+                android:background="@drawable/mosquito_button_background"/>
 
             <Button
                 android:id="@+id/tap_button_7"
@@ -119,7 +119,7 @@
                 android:textAllCaps="false"
                 android:layout_weight="1"
                 android:visibility="invisible"
-                android:background="@drawable/button_background"/>
+                android:background="@drawable/mosquito_button_background"/>
 
             <Button
                 android:id="@+id/tap_button_8"
@@ -128,7 +128,7 @@
                 android:textAllCaps="false"
                 android:layout_weight="1"
                 android:visibility="invisible"
-                android:background="@drawable/button_background"/>
+                android:background="@drawable/mosquito_button_background"/>
 
         </LinearLayout>
 
@@ -146,7 +146,7 @@
                 android:textAllCaps="false"
                 android:layout_weight="1"
                 android:visibility="invisible"
-                android:background="@drawable/button_background"/>
+                android:background="@drawable/mosquito_button_background"/>
 
             <Button
                 android:id="@+id/tap_button_10"
@@ -155,7 +155,7 @@
                 android:textAllCaps="false"
                 android:layout_weight="1"
                 android:visibility="invisible"
-                android:background="@drawable/button_background"/>
+                android:background="@drawable/mosquito_button_background"/>
 
             <Button
                 android:id="@+id/tap_button_11"
@@ -164,7 +164,7 @@
                 android:textAllCaps="false"
                 android:layout_weight="1"
                 android:visibility="invisible"
-                android:background="@drawable/button_background"/>
+                android:background="@drawable/mosquito_button_background"/>
 
         </LinearLayout>
     </LinearLayout>

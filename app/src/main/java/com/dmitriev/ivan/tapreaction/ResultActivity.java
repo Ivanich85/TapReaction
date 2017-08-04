@@ -14,6 +14,7 @@ public class ResultActivity extends AppCompatActivity{
     TextView mShowResultTextView;
     TextView mBestResultTextView;
     TextView mDifferenceBetweenResults;
+    TextView mNumberOfLicense;
 
     Button mNewGameButton;
     Button mExitButton;
@@ -36,6 +37,7 @@ public class ResultActivity extends AppCompatActivity{
         mDifferenceBetweenResults = (TextView) findViewById(R.id.difference_between_results_text_view);
         mNewGameButton = (Button) findViewById(R.id.new_game_button);
         mExitButton = (Button) findViewById(R.id.exit_button);
+        mNumberOfLicense = (TextView) findViewById(R.id.hunter_licenses_text_view);
     }
 
     private void actionViews() {
@@ -46,6 +48,7 @@ public class ResultActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 goToGameActivity();
+                NumberOfHuntingLicences.setHuntingLicense(NumberOfHuntingLicences.getHuntingLicense() - 1);
                 finish();
             }
         });
@@ -55,6 +58,7 @@ public class ResultActivity extends AppCompatActivity{
                 finish();
             }
         });
+        mNumberOfLicense.setText(NumberOfHuntingLicences.getHuntingLicense() + "");
     }
 
     private Double getResult() {

@@ -46,7 +46,7 @@ public class GameActivity extends AppCompatActivity {
 
     private static final int REMAIN_TIME = 3100;
     private static final int BUTTONS_QUANTITY = 12;
-    private static final int NUMBER_OF_TRIES = 20;//Количество комаров
+    private static final int NUMBER_OF_TRIES = 5;//Количество комаров
     private static final int VIBRATION_DURING = 35;//Длительность вибрации в миллисекундах
 
     protected static final String AVERAGE_RESULT_INTENT = "average result Intent";
@@ -99,7 +99,7 @@ public class GameActivity extends AppCompatActivity {
         });
     }
 
-    private void tappedMosquitoSound(final Button button) {
+    private void whenMosquitoButtonTapped(final Button button) {
         button.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -216,7 +216,7 @@ public class GameActivity extends AppCompatActivity {
         if (mClicksCount < NUMBER_OF_TRIES) {
             selectRandomButton(generateRandom());
             actionViews(mRandomButton);
-            tappedMosquitoSound(mRandomButton);
+            whenMosquitoButtonTapped(mRandomButton);
             mClicksCount++;
         } else {
             sentResult();
