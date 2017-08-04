@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ResultActivity extends AppCompatActivity{
 
@@ -18,6 +19,8 @@ public class ResultActivity extends AppCompatActivity{
 
     Button mNewGameButton;
     Button mExitButton;
+
+    private int mLicensesNumber;
 
     protected static final String BEST_AVERAGE_RESULT = "BEST AVERAGE RESULT";
     protected static final String AVERAGE_RESULT_FLOAT = "average result float";
@@ -35,9 +38,10 @@ public class ResultActivity extends AppCompatActivity{
         mShowResultTextView = (TextView) findViewById(R.id.show_result_text_view);
         mBestResultTextView = (TextView) findViewById(R.id.best_result_text_view);
         mDifferenceBetweenResults = (TextView) findViewById(R.id.difference_between_results_text_view);
+        mNumberOfLicense = (TextView) findViewById(R.id.hunter_licenses_text_view);
         mNewGameButton = (Button) findViewById(R.id.new_game_button);
         mExitButton = (Button) findViewById(R.id.exit_button);
-        mNumberOfLicense = (TextView) findViewById(R.id.hunter_licenses_text_view);
+        mLicensesNumber = loadPreferencesOfLicense(MainScreenActivity.TIME_AND_LICENSE);
     }
 
     private void actionViews() {
@@ -47,9 +51,16 @@ public class ResultActivity extends AppCompatActivity{
         mNewGameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goToGameActivity();
-                NumberOfHuntingLicences.setHuntingLicense(NumberOfHuntingLicences.getHuntingLicense() - 1);
-                finish();
+                if (ifGameCanStarted(loadPreferencesOfLicense(MainScreenActivity.TIME_AND_LICENSE))) {
+                    goToGameActivity();
+                    mLicensesNumber = mLicensesNumber - 1;
+                    savePreferencesOfLicense(loadPreferencesOfLicense(MainScreenActivity.TIME_AND_LICENSE) - 1, MainScreenActivity.TIME_AND_LICENSE);
+                    finish();
+                }
+                else {
+                    Toast myToast = Toast.makeText(ResultActivity.this, R.string.there_are_no_hunting_license, Toast.LENGTH_LONG );
+                    myToast.show();
+                }
             }
         });
         mExitButton.setOnClickListener(new View.OnClickListener() {
@@ -58,7 +69,7 @@ public class ResultActivity extends AppCompatActivity{
                 finish();
             }
         });
-        mNumberOfLicense.setText(NumberOfHuntingLicences.getHuntingLicense() + "");
+        mNumberOfLicense.setText(getString(R.string.hunting_licences_remain) + mLicensesNumber);
     }
 
     private Double getResult() {
@@ -74,11 +85,19 @@ public class ResultActivity extends AppCompatActivity{
         return String.format("%.3f", time);
     }
 
+    //Сохраняем результат в SharedPreferences
+    private double savePreferences(double bestAverageResult, String bestResult) {
+        SharedPreferences mBestResult = getSharedPreferences(bestResult, Context.MODE_PRIVATE);
+        SharedPreferences.Editor mEditor = mBestResult.edit();
+        mEditor.putFloat(AVERAGE_RESULT_FLOAT, (float)bestAverageResult);
+        mEditor.apply();
+        return bestAverageResult;
+    }
+
     //Загружаем результат из SharedPreferences
     private float loadPreferences (String bestResult) {
         SharedPreferences myBestResult = getSharedPreferences(bestResult, Context.MODE_PRIVATE);
-        float averageBestResult = myBestResult.getFloat(AVERAGE_RESULT_FLOAT, 0);
-        return averageBestResult;
+        return myBestResult.getFloat(AVERAGE_RESULT_FLOAT, 0);
     }
 
     //Проверяем, лучше ли новый результат, чем предыдущий
@@ -86,10 +105,16 @@ public class ResultActivity extends AppCompatActivity{
         if (bestResult != 0) {
             if (currentResult <= bestResult) {
                 savePreferences(currentResult, bestAverageResult);
-                mDifferenceBetweenResults.setText("Новый рекорд!");
+                mDifferenceBetweenResults.setText(R.string.new_record);
             } return true;
         } else savePreferences(currentResult, bestAverageResult);
         return false;
+    }
+
+    private boolean ifGameCanStarted(int license) {
+        if (license > 0) {
+            return true;
+        } else return false;
     }
 
     //Обновляем текст лучшего результата
@@ -105,17 +130,23 @@ public class ResultActivity extends AppCompatActivity{
         }
     }
 
-    //Сохраняем результат
-    private double savePreferences(double bestAverageResult, String bestResult) {
-        SharedPreferences mBestResult = getSharedPreferences(bestResult, Context.MODE_PRIVATE);
-        SharedPreferences.Editor mEditor = mBestResult.edit();
-        mEditor.putFloat(AVERAGE_RESULT_FLOAT, (float)bestAverageResult);
-        mEditor.apply();
-        return bestAverageResult;
-    }
-
+    //Переходим в новую игру
     private void goToGameActivity() {
         Intent mGoToGameActivity = new Intent(ResultActivity.this, GameActivity.class);
         startActivity(mGoToGameActivity);
+    }
+
+    //Сохраняем количество лицензий
+    private void savePreferencesOfLicense(int licenseNumber, String license) {
+        SharedPreferences mLicenseNumber = getSharedPreferences(license, Context.MODE_PRIVATE);
+        SharedPreferences.Editor mEditor = mLicenseNumber.edit();
+        mEditor.putInt(MainScreenActivity.NUMBER_OF_LICENSE, licenseNumber);
+        mEditor.apply();
+    }
+
+    //Загружаем количество лицензий
+    protected int loadPreferencesOfLicense(String license) {
+        SharedPreferences mLicenseNumber = getSharedPreferences(license, Context.MODE_PRIVATE);
+        return mLicenseNumber.getInt(MainScreenActivity.NUMBER_OF_LICENSE, 5);
     }
 }

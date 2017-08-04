@@ -12,4 +12,7 @@
     <string name="start_game">Start game</string>
     <string name="new_game">New game</string>
     <string name="exit_game">Exit game</string>
+    <string name="hunting_licences_remain">"Hunting licences remain: "</string>
+    <string name="new_record">New record!</string>
+    <string name="there_are_no_hunting_license">You don`t have hunting license more.\nPlease wait or buy more licenses</string>
 </resources>
