@@ -46,7 +46,7 @@ public class GameActivity extends AppCompatActivity {
 
     private static final int REMAIN_TIME = 3100;
     private static final int BUTTONS_QUANTITY = 12;
-    private static final int NUMBER_OF_TRIES = 5;//Количество комаров
+    private static final int QUANTITY_OF_MOSQUITOS = 3;//Количество комаров
     private static final int VIBRATION_DURING = 35;//Длительность вибрации в миллисекундах
 
     protected static final String AVERAGE_RESULT_INTENT = "average result Intent";
@@ -60,7 +60,6 @@ public class GameActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mVibrator = (Vibrator)this.getSystemService(VIBRATOR_SERVICE);
         setContentView(R.layout.activity_game);
         initViews();
         startTimer(REMAIN_TIME);
@@ -85,9 +84,11 @@ public class GameActivity extends AppCompatActivity {
         mBestResult = (TextView) findViewById(R.id.best_result_text_view);
 
         mTappedMosquito = MediaPlayer.create(this, R.raw.trueanswer);
+
+        mVibrator = (Vibrator) this.getSystemService(VIBRATOR_SERVICE);
     }
 
-    private void actionViews(final Button button){
+    private void actionViews(final Button button) {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -213,7 +214,7 @@ public class GameActivity extends AppCompatActivity {
 
     //Показываем случайную кнопку и выводим среднее время по окончании цикла
     private void showButton() {
-        if (mClicksCount < NUMBER_OF_TRIES) {
+        if (mClicksCount < QUANTITY_OF_MOSQUITOS) {
             selectRandomButton(generateRandom());
             actionViews(mRandomButton);
             whenMosquitoButtonTapped(mRandomButton);

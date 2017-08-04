@@ -3,6 +3,7 @@ package com.dmitriev.ivan.tapreaction;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,7 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class ResultActivity extends AppCompatActivity{
+public class ResultActivity extends AppCompatActivity {
 
     TextView mShowResultTextView;
     TextView mBestResultTextView;
@@ -19,8 +20,15 @@ public class ResultActivity extends AppCompatActivity{
 
     Button mNewGameButton;
     Button mExitButton;
+    Button mAddLicenses;
 
     private int mLicensesNumber;
+
+    private Vibrator mVibrator;
+
+    //Длительность вибрации в миллисекундах
+    private static final int GAME_START = 50;
+    private static final int NO_LICENSES = 300;
 
     protected static final String BEST_AVERAGE_RESULT = "BEST AVERAGE RESULT";
     protected static final String AVERAGE_RESULT_FLOAT = "average result float";
@@ -39,26 +47,35 @@ public class ResultActivity extends AppCompatActivity{
         mBestResultTextView = (TextView) findViewById(R.id.best_result_text_view);
         mDifferenceBetweenResults = (TextView) findViewById(R.id.difference_between_results_text_view);
         mNumberOfLicense = (TextView) findViewById(R.id.hunter_licenses_text_view);
+
         mNewGameButton = (Button) findViewById(R.id.new_game_button);
         mExitButton = (Button) findViewById(R.id.exit_button);
+        mAddLicenses = (Button) findViewById(R.id.add_licences_button);
+
         mLicensesNumber = loadPreferencesOfLicense(MainScreenActivity.TIME_AND_LICENSE);
+
+        mVibrator = (Vibrator) this.getSystemService(VIBRATOR_SERVICE);
     }
 
     private void actionViews() {
-        mShowResultTextView.setText(getText(R.string.current_result) + formattedDouble(getResult())
-                + getText(R.string.sec_for_result));
+        mShowResultTextView.setText(getText(R.string.current_result) + formattedDouble(getResult()) + getText(R.string.sec_for_result));
         mBestResultTextView.setText(setTextForBestResult());
         mNewGameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (ifGameCanStarted(loadPreferencesOfLicense(MainScreenActivity.TIME_AND_LICENSE))) {
+                    mVibrator.vibrate(GAME_START);
                     goToGameActivity();
                     mLicensesNumber = mLicensesNumber - 1;
-                    savePreferencesOfLicense(loadPreferencesOfLicense(MainScreenActivity.TIME_AND_LICENSE) - 1, MainScreenActivity.TIME_AND_LICENSE);
+                    savePreferencesOfLicense(loadPreferencesOfLicense(MainScreenActivity.TIME_AND_LICENSE) - 1,
+                            MainScreenActivity.TIME_AND_LICENSE);
                     finish();
-                }
-                else {
-                    Toast myToast = Toast.makeText(ResultActivity.this, R.string.there_are_no_hunting_license, Toast.LENGTH_LONG );
+                } else {
+                    mVibrator.vibrate(NO_LICENSES);
+                    mAddLicenses.setVisibility(View.VISIBLE);
+                    Toast myToast = Toast.makeText(ResultActivity.this,
+                            R.string.there_are_no_hunting_license, Toast.LENGTH_SHORT);
+                    myToast.setGravity(0, 0, 0);
                     myToast.show();
                 }
             }
@@ -67,6 +84,14 @@ public class ResultActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+        mAddLicenses.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mLicensesNumber = mLicensesNumber + MainScreenActivity.LICENSE_QUANTITY;
+                savePreferencesOfLicense(mLicensesNumber, MainScreenActivity.TIME_AND_LICENSE);
+                mNumberOfLicense.setText(getString(R.string.hunting_licences_remain) + mLicensesNumber);
             }
         });
         mNumberOfLicense.setText(getString(R.string.hunting_licences_remain) + mLicensesNumber);
@@ -89,13 +114,13 @@ public class ResultActivity extends AppCompatActivity{
     private double savePreferences(double bestAverageResult, String bestResult) {
         SharedPreferences mBestResult = getSharedPreferences(bestResult, Context.MODE_PRIVATE);
         SharedPreferences.Editor mEditor = mBestResult.edit();
-        mEditor.putFloat(AVERAGE_RESULT_FLOAT, (float)bestAverageResult);
+        mEditor.putFloat(AVERAGE_RESULT_FLOAT, (float) bestAverageResult);
         mEditor.apply();
         return bestAverageResult;
     }
 
     //Загружаем результат из SharedPreferences
-    private float loadPreferences (String bestResult) {
+    private float loadPreferences(String bestResult) {
         SharedPreferences myBestResult = getSharedPreferences(bestResult, Context.MODE_PRIVATE);
         return myBestResult.getFloat(AVERAGE_RESULT_FLOAT, 0);
     }
@@ -106,11 +131,13 @@ public class ResultActivity extends AppCompatActivity{
             if (currentResult <= bestResult) {
                 savePreferences(currentResult, bestAverageResult);
                 mDifferenceBetweenResults.setText(R.string.new_record);
-            } return true;
+            }
+            return true;
         } else savePreferences(currentResult, bestAverageResult);
         return false;
     }
 
+    //Проверка количества лицензий
     private boolean ifGameCanStarted(int license) {
         if (license > 0) {
             return true;
@@ -147,6 +174,6 @@ public class ResultActivity extends AppCompatActivity{
     //Загружаем количество лицензий
     protected int loadPreferencesOfLicense(String license) {
         SharedPreferences mLicenseNumber = getSharedPreferences(license, Context.MODE_PRIVATE);
-        return mLicenseNumber.getInt(MainScreenActivity.NUMBER_OF_LICENSE, 5);
+        return mLicenseNumber.getInt(MainScreenActivity.NUMBER_OF_LICENSE, MainScreenActivity.LICENSE_QUANTITY);
     }
 }
