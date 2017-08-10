@@ -66,6 +66,8 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void initViews() {
+        mClicksCount = 0;
+
         mButton0 = (Button) findViewById(R.id.tap_button_0);
         mButton1 = (Button) findViewById(R.id.tap_button_1);
         mButton2 = (Button) findViewById(R.id.tap_button_2);
@@ -221,7 +223,6 @@ public class GameActivity extends AppCompatActivity {
             mClicksCount++;
         } else {
             sentResult();
-            mClicksCount = 0;
             finish();
         }
     }

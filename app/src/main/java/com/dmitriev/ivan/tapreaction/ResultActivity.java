@@ -11,12 +11,14 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Date;
+
 public class ResultActivity extends AppCompatActivity {
 
     TextView mShowResultTextView;
     TextView mBestResultTextView;
     TextView mDifferenceBetweenResults;
-    TextView mNumberOfLicense;
+    TextView mHunterLicenses;
 
     Button mNewGameButton;
     Button mExitButton;
@@ -46,7 +48,7 @@ public class ResultActivity extends AppCompatActivity {
         mShowResultTextView = (TextView) findViewById(R.id.show_result_text_view);
         mBestResultTextView = (TextView) findViewById(R.id.best_result_text_view);
         mDifferenceBetweenResults = (TextView) findViewById(R.id.difference_between_results_text_view);
-        mNumberOfLicense = (TextView) findViewById(R.id.hunter_licenses_text_view);
+        mHunterLicenses = (TextView) findViewById(R.id.hunter_licenses_text_view);
 
         mNewGameButton = (Button) findViewById(R.id.new_game_button);
         mExitButton = (Button) findViewById(R.id.exit_button);
@@ -69,15 +71,17 @@ public class ResultActivity extends AppCompatActivity {
                     mLicensesNumber = mLicensesNumber - 1;
                     savePreferencesOfLicense(loadPreferencesOfLicense(MainScreenActivity.TIME_AND_LICENSE) - 1,
                             MainScreenActivity.TIME_AND_LICENSE);
+                    savePreferenceOfTime(0, MainScreenActivity.TIME_AND_LICENSE);
                     finish();
                 } else {
-                    mVibrator.vibrate(NO_LICENSES);
                     mAddLicenses.setVisibility(View.VISIBLE);
+                    mVibrator.vibrate(NO_LICENSES);
                     Toast myToast = Toast.makeText(ResultActivity.this,
                             R.string.there_are_no_hunting_license, Toast.LENGTH_SHORT);
                     myToast.setGravity(0, 0, 0);
-                    myToast.show();
+                    //myToast.show();
                 }
+
             }
         });
         mExitButton.setOnClickListener(new View.OnClickListener() {
@@ -91,10 +95,10 @@ public class ResultActivity extends AppCompatActivity {
             public void onClick(View v) {
                 mLicensesNumber = mLicensesNumber + MainScreenActivity.LICENSE_QUANTITY;
                 savePreferencesOfLicense(mLicensesNumber, MainScreenActivity.TIME_AND_LICENSE);
-                mNumberOfLicense.setText(getString(R.string.hunting_licences_remain) + mLicensesNumber);
+                mHunterLicenses.setText(getString(R.string.hunting_licences_remain) + mLicensesNumber);
             }
         });
-        mNumberOfLicense.setText(getString(R.string.hunting_licences_remain) + mLicensesNumber);
+        mHunterLicenses.setText(getString(R.string.hunting_licences_remain) + mLicensesNumber);
     }
 
     private Double getResult() {
@@ -127,7 +131,7 @@ public class ResultActivity extends AppCompatActivity {
 
     //Проверяем, лучше ли новый результат, чем предыдущий
     private boolean newBestResult(float bestResult, double currentResult, String bestAverageResult) {
-        if (bestResult != 0) {
+        if (bestResult != 0.0) {
             if (currentResult <= bestResult) {
                 savePreferences(currentResult, bestAverageResult);
                 mDifferenceBetweenResults.setText(R.string.new_record);
@@ -135,13 +139,6 @@ public class ResultActivity extends AppCompatActivity {
             return true;
         } else savePreferences(currentResult, bestAverageResult);
         return false;
-    }
-
-    //Проверка количества лицензий
-    private boolean ifGameCanStarted(int license) {
-        if (license > 0) {
-            return true;
-        } else return false;
     }
 
     //Обновляем текст лучшего результата
@@ -175,5 +172,61 @@ public class ResultActivity extends AppCompatActivity {
     protected int loadPreferencesOfLicense(String license) {
         SharedPreferences mLicenseNumber = getSharedPreferences(license, Context.MODE_PRIVATE);
         return mLicenseNumber.getInt(MainScreenActivity.NUMBER_OF_LICENSE, MainScreenActivity.LICENSE_QUANTITY);
+    }
+
+    //Добавялем лицензии
+    private void addingLicenses() {
+        mLicensesNumber = mLicensesNumber + MainScreenActivity.LICENSE_QUANTITY;
+        savePreferencesOfLicense(mLicensesNumber, MainScreenActivity.TIME_AND_LICENSE);
+        mHunterLicenses.setText(getString(R.string.hunting_licences_remain) + mLicensesNumber);
+    }
+
+    //Проверка условия перед запуском игры
+    private boolean ifGameCanStarted(int license) {
+        if (license > 0) {
+            return true;
+        } else {
+            if (loadPreferenceOfTime(MainScreenActivity.TIME_AND_LICENSE) == 0) {
+                savePreferenceOfTime(newCurrentTime(), MainScreenActivity.TIME_AND_LICENSE);
+            }
+            if (isCompareTimeOk(newCurrentTime(), loadPreferenceOfTime(MainScreenActivity.TIME_AND_LICENSE))) {
+                return true;
+            }
+        } return false;
+    }
+
+    //Сохраняем время
+    private void savePreferenceOfTime(long time, String currentTime) {
+        SharedPreferences mTime = getSharedPreferences(currentTime, Context.MODE_PRIVATE);
+        SharedPreferences.Editor mEditor = mTime.edit();
+        mEditor.putLong(MainScreenActivity.CURRENT_TIME, time);
+        mEditor.apply();
+    }
+
+    //Загружаем время
+    private long loadPreferenceOfTime(String currentTime) {
+        SharedPreferences mTime = getSharedPreferences(currentTime, Context.MODE_PRIVATE);
+        return mTime.getLong(MainScreenActivity.CURRENT_TIME, 0);
+    }
+
+    //Новое время
+    private long newCurrentTime() {
+        Date mDate = new Date();
+        return mDate.getTime();
+    }
+
+    //Проверяем, сколько прошло времени с момента окончания лицензий
+    private boolean isCompareTimeOk(long currentTime, long savedTime) {
+        long mDifferenceTime = (currentTime - savedTime);
+        if (mDifferenceTime > MainScreenActivity.COMPARED_TIME * 60 *1000) {
+            addingLicenses();
+            return true;
+        } else {
+            Toast myToast = Toast.makeText(ResultActivity.this,
+                    "Осталось времени: " + (MainScreenActivity.COMPARED_TIME * 60 - mDifferenceTime / 1000) + " сек.", Toast.LENGTH_SHORT);
+            myToast.setGravity(0, 0, 0);
+            myToast.show();
+            return false;
+        }
     }
 }
