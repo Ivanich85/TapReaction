@@ -16,7 +16,9 @@
     <string name="hunting_licences_remain">"Hunting licences remain: "</string>
     <string name="new_record">New record!</string>
     <string name="there_are_no_hunting_license">"You don`t have hunting license more.\nPlease wait "</string>
-    <string name="buy_license">" or buy more licenses"</string>
+    <string name="buy_license">"or buy more licenses"</string>
     <string name="waiting_time">"Waiting time: "</string>
     <string name="can_play">You can play again!</string>
+    <string name="name">Tap a mosquito!</string>
+    <string name="slogan">Tap`em all and do it fast! :)</string>
 </resources>

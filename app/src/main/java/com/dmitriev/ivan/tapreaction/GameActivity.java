@@ -1,6 +1,7 @@
 package com.dmitriev.ivan.tapreaction;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.os.CountDownTimer;
 import android.os.Vibrator;
@@ -84,6 +85,10 @@ public class GameActivity extends AppCompatActivity {
         mTimer = (TextView) findViewById(R.id.timer_text_view);
         mCurrentResult = (TextView) findViewById(R.id.current_result_text_view);
         mBestResult = (TextView) findViewById(R.id.best_result_text_view);
+
+        Typeface typeface1 = Typeface.createFromAsset(getAssets(), MainScreenActivity.FONT_PATH_1);
+
+        mTimer.setTypeface(typeface1);
 
         mTappedMosquito = MediaPlayer.create(this, R.raw.trueanswer);
 
@@ -205,6 +210,7 @@ public class GameActivity extends AppCompatActivity {
         mTimerBeforeStart = new CountDownTimer(time, 1000) {
             public void onTick(long millisUntilFinished) {
                 mTimer.setText(millisUntilFinished / 1000 + "");
+                mTappedMosquito.start();
             }
 
             public void onFinish() {
