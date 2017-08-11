@@ -4,15 +4,19 @@
     <string name="best_result_is">"Best result is: "</string>
     <string name="button_text">Tap!</string>
     <string name="time_before_start">"00:0"</string>
-    <string name="start_tapping">Let`s TAP!!!</string>
     <string name="sec_for_result">" sec."</string>
+    <string name="min_for_result">" min "</string>
+    <string name="hours_for_result">" h "</string>
     <string name="no_best_result">There is no best result enough\nBut why you don`t change it? </string>/>
     <string name="improve_result">"Your result improved by "</string>
     <string name="worse_result">"Your result is worse by "</string>
     <string name="start_game">Start game</string>
-    <string name="new_game">New game</string>
+    <string name="main_menu">Go to main menu</string>
     <string name="exit_game">Exit game</string>
     <string name="hunting_licences_remain">"Hunting licences remain: "</string>
     <string name="new_record">New record!</string>
-    <string name="there_are_no_hunting_license">You don`t have hunting license more.\nPlease wait or buy more licenses</string>
+    <string name="there_are_no_hunting_license">"You don`t have hunting license more.\nPlease wait "</string>
+    <string name="buy_license">" or buy more licenses"</string>
+    <string name="waiting_time">"Waiting time: "</string>
+    <string name="can_play">You can play again!</string>
 </resources>

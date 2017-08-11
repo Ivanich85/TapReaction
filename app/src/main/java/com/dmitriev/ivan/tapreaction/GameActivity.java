@@ -223,7 +223,6 @@ public class GameActivity extends AppCompatActivity {
             mClicksCount++;
         } else {
             sentResult();
-            finish();
         }
     }
 
@@ -241,5 +240,6 @@ public class GameActivity extends AppCompatActivity {
         Intent mGoToResultActivityAndSentResult = new Intent(GameActivity.this, ResultActivity.class);
         mGoToResultActivityAndSentResult.putExtra(AVERAGE_RESULT_INTENT, calculateAverageTime(mTimesOfReaction));
         startActivity(mGoToResultActivityAndSentResult);
+        finish();
     }
 }

@@ -24,10 +24,10 @@
         android:layout_height="wrap_content"/>
 
     <Button
-        android:id="@+id/new_game_button"
+        android:id="@+id/main_activity_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/new_game"/>
+        android:text="@string/main_menu"/>
 
     <Button
         android:id="@+id/exit_button"
@@ -35,16 +35,5 @@
         android:layout_height="wrap_content"
         android:text="@string/exit_game"/>
 
-    <TextView
-        android:id="@+id/hunter_licenses_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-    <Button
-        android:id="@+id/add_licences_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Add licenses"
-        android:visibility="invisible"/>
 
 </LinearLayout>

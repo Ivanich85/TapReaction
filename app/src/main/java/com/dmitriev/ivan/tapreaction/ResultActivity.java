@@ -3,15 +3,11 @@ package com.dmitriev.ivan.tapreaction;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import java.util.Date;
 
 public class ResultActivity extends AppCompatActivity {
 
@@ -20,17 +16,9 @@ public class ResultActivity extends AppCompatActivity {
     TextView mDifferenceBetweenResults;
     TextView mHunterLicenses;
 
-    Button mNewGameButton;
+    Button mMainActivityButton;
     Button mExitButton;
     Button mAddLicenses;
-
-    private int mLicensesNumber;
-
-    private Vibrator mVibrator;
-
-    //Длительность вибрации в миллисекундах
-    private static final int GAME_START = 50;
-    private static final int NO_LICENSES = 300;
 
     protected static final String BEST_AVERAGE_RESULT = "BEST AVERAGE RESULT";
     protected static final String AVERAGE_RESULT_FLOAT = "average result float";
@@ -50,38 +38,18 @@ public class ResultActivity extends AppCompatActivity {
         mDifferenceBetweenResults = (TextView) findViewById(R.id.difference_between_results_text_view);
         mHunterLicenses = (TextView) findViewById(R.id.hunter_licenses_text_view);
 
-        mNewGameButton = (Button) findViewById(R.id.new_game_button);
+        mMainActivityButton = (Button) findViewById(R.id.main_activity_button);
         mExitButton = (Button) findViewById(R.id.exit_button);
         mAddLicenses = (Button) findViewById(R.id.add_licences_button);
-
-        mLicensesNumber = loadPreferencesOfLicense(MainScreenActivity.TIME_AND_LICENSE);
-
-        mVibrator = (Vibrator) this.getSystemService(VIBRATOR_SERVICE);
     }
 
     private void actionViews() {
         mShowResultTextView.setText(getText(R.string.current_result) + formattedDouble(getResult()) + getText(R.string.sec_for_result));
         mBestResultTextView.setText(setTextForBestResult());
-        mNewGameButton.setOnClickListener(new View.OnClickListener() {
+        mMainActivityButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (ifGameCanStarted(loadPreferencesOfLicense(MainScreenActivity.TIME_AND_LICENSE))) {
-                    mVibrator.vibrate(GAME_START);
-                    goToGameActivity();
-                    mLicensesNumber = mLicensesNumber - 1;
-                    savePreferencesOfLicense(loadPreferencesOfLicense(MainScreenActivity.TIME_AND_LICENSE) - 1,
-                            MainScreenActivity.TIME_AND_LICENSE);
-                    savePreferenceOfTime(0, MainScreenActivity.TIME_AND_LICENSE);
-                    finish();
-                } else {
-                    mAddLicenses.setVisibility(View.VISIBLE);
-                    mVibrator.vibrate(NO_LICENSES);
-                    Toast myToast = Toast.makeText(ResultActivity.this,
-                            R.string.there_are_no_hunting_license, Toast.LENGTH_SHORT);
-                    myToast.setGravity(0, 0, 0);
-                    //myToast.show();
-                }
-
+            goToMainScreenSctivity();
             }
         });
         mExitButton.setOnClickListener(new View.OnClickListener() {
@@ -90,15 +58,6 @@ public class ResultActivity extends AppCompatActivity {
                 finish();
             }
         });
-        mAddLicenses.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mLicensesNumber = mLicensesNumber + MainScreenActivity.LICENSE_QUANTITY;
-                savePreferencesOfLicense(mLicensesNumber, MainScreenActivity.TIME_AND_LICENSE);
-                mHunterLicenses.setText(getString(R.string.hunting_licences_remain) + mLicensesNumber);
-            }
-        });
-        mHunterLicenses.setText(getString(R.string.hunting_licences_remain) + mLicensesNumber);
     }
 
     private Double getResult() {
@@ -155,78 +114,9 @@ public class ResultActivity extends AppCompatActivity {
     }
 
     //Переходим в новую игру
-    private void goToGameActivity() {
-        Intent mGoToGameActivity = new Intent(ResultActivity.this, GameActivity.class);
-        startActivity(mGoToGameActivity);
-    }
-
-    //Сохраняем количество лицензий
-    private void savePreferencesOfLicense(int licenseNumber, String license) {
-        SharedPreferences mLicenseNumber = getSharedPreferences(license, Context.MODE_PRIVATE);
-        SharedPreferences.Editor mEditor = mLicenseNumber.edit();
-        mEditor.putInt(MainScreenActivity.NUMBER_OF_LICENSE, licenseNumber);
-        mEditor.apply();
-    }
-
-    //Загружаем количество лицензий
-    protected int loadPreferencesOfLicense(String license) {
-        SharedPreferences mLicenseNumber = getSharedPreferences(license, Context.MODE_PRIVATE);
-        return mLicenseNumber.getInt(MainScreenActivity.NUMBER_OF_LICENSE, MainScreenActivity.LICENSE_QUANTITY);
-    }
-
-    //Добавялем лицензии
-    private void addingLicenses() {
-        mLicensesNumber = mLicensesNumber + MainScreenActivity.LICENSE_QUANTITY;
-        savePreferencesOfLicense(mLicensesNumber, MainScreenActivity.TIME_AND_LICENSE);
-        mHunterLicenses.setText(getString(R.string.hunting_licences_remain) + mLicensesNumber);
-    }
-
-    //Проверка условия перед запуском игры
-    private boolean ifGameCanStarted(int license) {
-        if (license > 0) {
-            return true;
-        } else {
-            if (loadPreferenceOfTime(MainScreenActivity.TIME_AND_LICENSE) == 0) {
-                savePreferenceOfTime(newCurrentTime(), MainScreenActivity.TIME_AND_LICENSE);
-            }
-            if (isCompareTimeOk(newCurrentTime(), loadPreferenceOfTime(MainScreenActivity.TIME_AND_LICENSE))) {
-                return true;
-            }
-        } return false;
-    }
-
-    //Сохраняем время
-    private void savePreferenceOfTime(long time, String currentTime) {
-        SharedPreferences mTime = getSharedPreferences(currentTime, Context.MODE_PRIVATE);
-        SharedPreferences.Editor mEditor = mTime.edit();
-        mEditor.putLong(MainScreenActivity.CURRENT_TIME, time);
-        mEditor.apply();
-    }
-
-    //Загружаем время
-    private long loadPreferenceOfTime(String currentTime) {
-        SharedPreferences mTime = getSharedPreferences(currentTime, Context.MODE_PRIVATE);
-        return mTime.getLong(MainScreenActivity.CURRENT_TIME, 0);
-    }
-
-    //Новое время
-    private long newCurrentTime() {
-        Date mDate = new Date();
-        return mDate.getTime();
-    }
-
-    //Проверяем, сколько прошло времени с момента окончания лицензий
-    private boolean isCompareTimeOk(long currentTime, long savedTime) {
-        long mDifferenceTime = (currentTime - savedTime);
-        if (mDifferenceTime > MainScreenActivity.COMPARED_TIME * 60 *1000) {
-            addingLicenses();
-            return true;
-        } else {
-            Toast myToast = Toast.makeText(ResultActivity.this,
-                    "Осталось времени: " + (MainScreenActivity.COMPARED_TIME * 60 - mDifferenceTime / 1000) + " сек.", Toast.LENGTH_SHORT);
-            myToast.setGravity(0, 0, 0);
-            myToast.show();
-            return false;
-        }
+    private void goToMainScreenSctivity() {
+        Intent mGoToMainScreenActivity = new Intent(ResultActivity.this, MainScreenActivity.class);
+        startActivity(mGoToMainScreenActivity);
+        finish();
     }
 }
