@@ -3,6 +3,7 @@ package com.dmitriev.ivan.tapreaction;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,12 +14,10 @@ public class ResultActivity extends AppCompatActivity {
 
     TextView mShowResultTextView;
     TextView mBestResultTextView;
-    TextView mDifferenceBetweenResults;
-    TextView mHunterLicenses;
+    TextView mNewRecord;
 
     Button mMainActivityButton;
     Button mExitButton;
-    Button mAddLicenses;
 
     protected static final String BEST_AVERAGE_RESULT = "BEST AVERAGE RESULT";
     protected static final String AVERAGE_RESULT_FLOAT = "average result float";
@@ -35,12 +34,19 @@ public class ResultActivity extends AppCompatActivity {
     private void initViews() {
         mShowResultTextView = (TextView) findViewById(R.id.show_result_text_view);
         mBestResultTextView = (TextView) findViewById(R.id.best_result_text_view);
-        mDifferenceBetweenResults = (TextView) findViewById(R.id.difference_between_results_text_view);
-        mHunterLicenses = (TextView) findViewById(R.id.hunter_licenses_text_view);
+        mNewRecord = (TextView) findViewById(R.id.new_record_text_view);
+
+        Typeface typeface1 = Typeface.createFromAsset(getAssets(), MainScreenActivity.FONT_PATH_1);
+
+        mShowResultTextView.setTypeface(typeface1);
+        mBestResultTextView.setTypeface(typeface1);
+        mNewRecord.setTypeface(typeface1);
 
         mMainActivityButton = (Button) findViewById(R.id.main_activity_button);
         mExitButton = (Button) findViewById(R.id.exit_button);
-        mAddLicenses = (Button) findViewById(R.id.add_licences_button);
+
+        mMainActivityButton.setTypeface(typeface1);
+        mExitButton.setTypeface(typeface1);
     }
 
     private void actionViews() {
@@ -49,7 +55,7 @@ public class ResultActivity extends AppCompatActivity {
         mMainActivityButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            goToMainScreenSctivity();
+                goToMainScreenSctivity();
             }
         });
         mExitButton.setOnClickListener(new View.OnClickListener() {
@@ -93,7 +99,7 @@ public class ResultActivity extends AppCompatActivity {
         if (bestResult != 0.0) {
             if (currentResult <= bestResult) {
                 savePreferences(currentResult, bestAverageResult);
-                mDifferenceBetweenResults.setText(R.string.new_record);
+                mNewRecord.setText(R.string.new_record);
             }
             return true;
         } else savePreferences(currentResult, bestAverageResult);

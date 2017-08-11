@@ -11,29 +11,41 @@
     <TextView
         android:id="@+id/show_result_text_view"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/current_result_dimen"
+        android:textColor="@color/colorPrimaryDark"/>
 
     <TextView
         android:id="@+id/best_result_text_view"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/best_result_dimen"
+        android:textColor="@color/dark_red"/>
 
     <TextView
-        android:id="@+id/difference_between_results_text_view"
+        android:id="@+id/new_record_text_view"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/current_result_dimen"
+        android:textColor="@color/green"/>
 
     <Button
         android:id="@+id/main_activity_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/main_menu"/>
+        android:text="@string/main_menu"
+        android:textColor="@color/dark_red"
+        android:textSize="@dimen/best_result_main_menu_dimen"
+        android:textAllCaps="false"/>
 
     <Button
         android:id="@+id/exit_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/exit_game"/>
+        android:text="@string/exit_game"
+        android:textColor="@color/dark_red"
+        android:textSize="@dimen/best_result_main_menu_dimen"
+        android:textAllCaps="false"/>
 
 
 </LinearLayout>
