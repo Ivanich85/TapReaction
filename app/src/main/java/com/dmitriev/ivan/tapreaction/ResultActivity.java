@@ -36,7 +36,7 @@ public class ResultActivity extends AppCompatActivity {
         mBestResultTextView = (TextView) findViewById(R.id.best_result_text_view);
         mNewRecord = (TextView) findViewById(R.id.new_record_text_view);
 
-        Typeface typeface1 = Typeface.createFromAsset(getAssets(), MainScreenActivity.FONT_PATH_1);
+        Typeface typeface1 = Typeface.createFromAsset(getAssets(), MainScreenActivity.FONT_PATH);
 
         mShowResultTextView.setTypeface(typeface1);
         mBestResultTextView.setTypeface(typeface1);

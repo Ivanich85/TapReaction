@@ -86,7 +86,7 @@ public class GameActivity extends AppCompatActivity {
         mCurrentResult = (TextView) findViewById(R.id.current_result_text_view);
         mBestResult = (TextView) findViewById(R.id.best_result_text_view);
 
-        Typeface typeface1 = Typeface.createFromAsset(getAssets(), MainScreenActivity.FONT_PATH_1);
+        Typeface typeface1 = Typeface.createFromAsset(getAssets(), MainScreenActivity.FONT_PATH);
 
         mTimer.setTypeface(typeface1);
 

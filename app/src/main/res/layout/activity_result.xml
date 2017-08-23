@@ -42,7 +42,8 @@
         android:textColor="@color/dark_red"
         android:textSize="@dimen/best_result_main_menu_dimen"
         android:layout_marginBottom="16dp"
-        android:padding="16dp"/>
+        android:padding="16dp"
+        android:background="@drawable/button"/>
 
     <Button
         android:id="@+id/exit_button"
@@ -52,6 +53,7 @@
         android:textAllCaps="false"
         android:textColor="@color/dark_red"
         android:textSize="@dimen/best_result_main_menu_dimen"
-        android:padding="16dp"/>
+        android:padding="16dp"
+        android:background="@drawable/button"/>
 
 </LinearLayout>
