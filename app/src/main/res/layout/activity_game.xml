@@ -4,40 +4,69 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:gravity="center"
+    android:orientation="vertical"
     tools:context="com.dmitriev.ivan.tapreaction.GameActivity">
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/backround_game"
         android:gravity="center"
         android:orientation="vertical"
-        android:background="@drawable/backround_game">
+        android:weightSum="13">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:indeterminate="false"
+                android:progressDrawable="@drawable/progress_bar"/>
+
+            <TextView
+                android:id="@+id/progress_bar_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/tapping_progress"
+                android:textColor="@color/dark_red"
+                android:textSize="@dimen/timer_and_text_main_menu_dimen"/>
+
+        </FrameLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="3"
             android:orientation="horizontal"
-            android:padding="8dp"
+            android:padding="4dp"
             android:weightSum="3">
 
             <Button
                 android:id="@+id/tap_button_0"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textAllCaps="false"
-                android:background="@drawable/mosquito_button_background"
                 android:layout_weight="1"
+                android:background="@drawable/mosquito_button_background"
+                android:textAllCaps="false"
                 android:visibility="invisible"/>
 
             <Button
                 android:id="@+id/tap_button_1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textAllCaps="false"
-                android:background="@drawable/mosquito_button_background"
                 android:layout_weight="1"
+                android:background="@drawable/mosquito_button_background"
+                android:textAllCaps="false"
                 android:visibility="invisible"/>
 
             <Button
@@ -56,141 +85,122 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:textSize="@dimen/timer_dimen"
             android:textColor="@color/red"
+            android:textSize="@dimen/timer_dimen"
             android:textStyle="bold"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="3"
             android:orientation="horizontal"
-            android:padding="8dp"
+            android:padding="4dp"
             android:weightSum="3">
 
             <Button
                 android:id="@+id/tap_button_3"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textAllCaps="false"
                 android:layout_weight="1"
-                android:visibility="invisible"
-                android:background="@drawable/mosquito_button_background"/>
+                android:background="@drawable/mosquito_button_background"
+                android:textAllCaps="false"
+                android:visibility="invisible"/>
 
             <Button
                 android:id="@+id/tap_button_4"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textAllCaps="false"
                 android:layout_weight="1"
-                android:visibility="invisible"
-                android:background="@drawable/mosquito_button_background"/>
+                android:background="@drawable/mosquito_button_background"
+                android:textAllCaps="false"
+                android:visibility="invisible"/>
 
             <Button
                 android:id="@+id/tap_button_5"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textAllCaps="false"
                 android:layout_weight="1"
-                android:visibility="invisible"
-                android:background="@drawable/mosquito_button_background"/>
+                android:background="@drawable/mosquito_button_background"
+                android:textAllCaps="false"
+                android:visibility="invisible"/>
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="3"
             android:orientation="horizontal"
-            android:padding="8dp"
+            android:padding="4dp"
             android:weightSum="3">
 
             <Button
                 android:id="@+id/tap_button_6"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textAllCaps="false"
                 android:layout_weight="1"
-                android:visibility="invisible"
-                android:background="@drawable/mosquito_button_background"/>
+                android:background="@drawable/mosquito_button_background"
+                android:textAllCaps="false"
+                android:visibility="invisible"/>
 
             <Button
                 android:id="@+id/tap_button_7"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textAllCaps="false"
                 android:layout_weight="1"
-                android:visibility="invisible"
-                android:background="@drawable/mosquito_button_background"/>
+                android:background="@drawable/mosquito_button_background"
+                android:textAllCaps="false"
+                android:visibility="invisible"/>
 
             <Button
                 android:id="@+id/tap_button_8"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textAllCaps="false"
                 android:layout_weight="1"
-                android:visibility="invisible"
-                android:background="@drawable/mosquito_button_background"/>
+                android:background="@drawable/mosquito_button_background"
+                android:textAllCaps="false"
+                android:visibility="invisible"/>
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="3"
             android:orientation="horizontal"
-            android:padding="8dp"
+            android:padding="4dp"
             android:weightSum="3">
 
             <Button
                 android:id="@+id/tap_button_9"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textAllCaps="false"
                 android:layout_weight="1"
-                android:visibility="invisible"
-                android:background="@drawable/mosquito_button_background"/>
+                android:background="@drawable/mosquito_button_background"
+                android:textAllCaps="false"
+                android:visibility="invisible"/>
 
             <Button
                 android:id="@+id/tap_button_10"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textAllCaps="false"
                 android:layout_weight="1"
-                android:visibility="invisible"
-                android:background="@drawable/mosquito_button_background"/>
+                android:background="@drawable/mosquito_button_background"
+                android:textAllCaps="false"
+                android:visibility="invisible"/>
 
             <Button
                 android:id="@+id/tap_button_11"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textAllCaps="false"
                 android:layout_weight="1"
-                android:visibility="invisible"
-                android:background="@drawable/mosquito_button_background"/>
+                android:background="@drawable/mosquito_button_background"
+                android:textAllCaps="false"
+                android:visibility="invisible"/>
 
         </LinearLayout>
+
+
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0"
-        android:orientation="vertical"
-        android:gravity="center">
-
-        <TextView
-            android:id="@+id/current_result_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:textSize="@dimen/current_result_dimen"/>
-
-
-        <TextView
-            android:id="@+id/best_result_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="@string/best_result_is"
-            android:layout_margin="8dp"
-            android:textSize="@dimen/best_result_dimen"/>
-
-    </LinearLayout>
 </LinearLayout>

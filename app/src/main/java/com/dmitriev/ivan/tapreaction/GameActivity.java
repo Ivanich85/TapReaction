@@ -10,8 +10,8 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
@@ -20,43 +20,47 @@ public class GameActivity extends AppCompatActivity {
 
     MediaPlayer mTappedMosquito;
 
-    Button mButton0;
-    Button mButton1;
-    Button mButton2;
-    Button mButton3;
-    Button mButton4;
-    Button mButton5;
-    Button mButton6;
-    Button mButton7;
-    Button mButton8;
-    Button mButton9;
-    Button mButton10;
-    Button mButton11;
-    Button mRandomButton;
+    private Button mButton0;
+    private Button mButton1;
+    private Button mButton2;
+    private Button mButton3;
+    private Button mButton4;
+    private Button mButton5;
+    private Button mButton6;
+    private Button mButton7;
+    private Button mButton8;
+    private Button mButton9;
+    private Button mButton10;
+    private Button mButton11;
+    private Button mRandomButton;
 
-    TextView mTimer;
-    TextView mCurrentResult;
-    TextView mBestResult;
+    private TextView mTimer;
+    private TextView mBestResult;
+    private TextView mProgressBarText;
 
-    long mVisibleMoment;
-    long mInvisibleMoment;
+    private ProgressBar mProgressBar;
 
-    CountDownTimer mTimerBeforeStart;
+    private int mStatusBarInitialValue = 0;
+
+    private long mVisibleMoment;
+    private long mInvisibleMoment;
+
+    private CountDownTimer mTimerBeforeStart;
 
     private Vibrator mVibrator;
 
     private static final int REMAIN_TIME = 3100;
     private static final int BUTTONS_QUANTITY = 12;
-    private static final int QUANTITY_OF_MOSQUITOS = 3;//Количество комаров
-    private static final int VIBRATION_DURING = 35;//Длительность вибрации в миллисекундах
-
-    protected static final String AVERAGE_RESULT_INTENT = "average result Intent";
-
-    Random mRandom = new Random();
+    private static final int QUANTITY_OF_MOSQUITOS = 15;//Количество комаров
+    private static final int VIBRATION_WHEN_TAPPING = 35;//Длительность вибрации в миллисекундах
 
     private static int mClicksCount;
 
-    ArrayList<Double> mTimesOfReaction = new ArrayList<>();
+    private Random mRandom = new Random();
+
+    private ArrayList<Double> mTimesOfReaction = new ArrayList<>();
+
+    protected static final String AVERAGE_RESULT_INTENT = "average result Intent";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,12 +86,17 @@ public class GameActivity extends AppCompatActivity {
         mButton10 = (Button) findViewById(R.id.tap_button_10);
         mButton11 = (Button) findViewById(R.id.tap_button_11);
 
-        mTimer = (TextView) findViewById(R.id.timer_text_view);
-        mCurrentResult = (TextView) findViewById(R.id.current_result_text_view);
-        mBestResult = (TextView) findViewById(R.id.best_result_text_view);
-
         Typeface typeface1 = Typeface.createFromAsset(getAssets(), MainScreenActivity.FONT_PATH);
 
+        mTimer = (TextView) findViewById(R.id.timer_text_view);
+        mBestResult = (TextView) findViewById(R.id.best_result_text_view);
+        mProgressBarText = (TextView) findViewById(R.id.progress_bar_text_view);
+
+        mProgressBar = (ProgressBar) findViewById(R.id.progress_bar);
+        mProgressBar.setProgress(mStatusBarInitialValue);
+        mProgressBar.setMax(QUANTITY_OF_MOSQUITOS);
+
+        mProgressBarText.setTypeface(typeface1);
         mTimer.setTypeface(typeface1);
 
         mTappedMosquito = MediaPlayer.create(this, R.raw.trueanswer);
@@ -103,6 +112,8 @@ public class GameActivity extends AppCompatActivity {
                 double time = timeCount(mVisibleMoment, mInvisibleMoment);
                 mTimesOfReaction.add(time);
                 showButton();
+                mStatusBarInitialValue++;
+                mProgressBar.setProgress(mStatusBarInitialValue);
             }
         });
     }
@@ -112,7 +123,7 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    mVibrator.vibrate(VIBRATION_DURING);
+                    mVibrator.vibrate(VIBRATION_WHEN_TAPPING);
                     mTappedMosquito.start();
                 }
                 return false;
@@ -131,7 +142,7 @@ public class GameActivity extends AppCompatActivity {
         return (invisibleMoment - visibleMoment) / 1000.0;
     }
 
-    //Временная матка, когда кнопка повилась
+    //Временная метка, когда кнопка повилась
     private void buttonIsVisible(Button button) {
         button.setVisibility(View.VISIBLE);
         mVisibleMoment = timeSearch();
