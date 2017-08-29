@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
@@ -19,6 +20,9 @@ import java.util.Random;
 public class GameActivity extends AppCompatActivity {
 
     MediaPlayer mTappedMosquito;
+    MediaPlayer mBackgroundSound;
+    MediaPlayer mMosquitoSound;
+    MediaPlayer mTimerSound;
 
     private Button mButton0;
     private Button mButton1;
@@ -51,7 +55,7 @@ public class GameActivity extends AppCompatActivity {
 
     private static final int REMAIN_TIME = 3100;
     private static final int BUTTONS_QUANTITY = 12;
-    private static final int QUANTITY_OF_MOSQUITOS = 15;//Количество комаров
+    private static final int QUANTITY_OF_MOSQUITOS = 3;//Количество комаров
     private static final int VIBRATION_WHEN_TAPPING = 35;//Длительность вибрации в миллисекундах
 
     private static int mClicksCount;
@@ -68,6 +72,19 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game);
         initViews();
         startTimer(REMAIN_TIME);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mBackgroundSound.start();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mBackgroundSound.stop();
+        mMosquitoSound.stop();
     }
 
     private void initViews() {
@@ -99,7 +116,10 @@ public class GameActivity extends AppCompatActivity {
         mProgressBarText.setTypeface(typeface1);
         mTimer.setTypeface(typeface1);
 
-        mTappedMosquito = MediaPlayer.create(this, R.raw.trueanswer);
+        mTappedMosquito = MediaPlayer.create(this, R.raw.mosuito_tapped_sound);
+        mBackgroundSound = MediaPlayer.create(this, R.raw.background_sound);
+        mMosquitoSound = MediaPlayer.create(this, R.raw.mosquito_sound);
+        mTimerSound = MediaPlayer.create(this, R.raw.timer_sound);
 
         mVibrator = (Vibrator) this.getSystemService(VIBRATOR_SERVICE);
     }
@@ -221,12 +241,14 @@ public class GameActivity extends AppCompatActivity {
         mTimerBeforeStart = new CountDownTimer(time, 1000) {
             public void onTick(long millisUntilFinished) {
                 mTimer.setText(millisUntilFinished / 1000 + "");
-                mTappedMosquito.start();
+                mTimerSound.start();
             }
 
             public void onFinish() {
                 mTimer.setText("");
                 showButton();
+                mMosquitoSound.start();
+                mMosquitoSound.isLooping();
             }
         }.start();
     }

@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.media.MediaPlayer;
+import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +13,12 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class ResultActivity extends AppCompatActivity {
+
+    MediaPlayer mNewRecordSound;
+    MediaPlayer mNotNewRecordSound;
+    MediaPlayer mPressButton;
+
+    private Vibrator mVibrator;
 
     TextView mShowResultTextView;
     TextView mBestResultTextView;
@@ -47,6 +55,12 @@ public class ResultActivity extends AppCompatActivity {
 
         mMainActivityButton.setTypeface(typeface1);
         mExitButton.setTypeface(typeface1);
+
+        mNewRecordSound = MediaPlayer.create(this, R.raw.new_record_sound);
+        mNotNewRecordSound = MediaPlayer.create(this, R.raw.not_new_record_sound);
+        mPressButton = MediaPlayer.create(this, R.raw.press_button_sound);
+
+        mVibrator = (Vibrator) this.getSystemService(VIBRATOR_SERVICE);
     }
 
     private void actionViews() {
@@ -55,12 +69,14 @@ public class ResultActivity extends AppCompatActivity {
         mMainActivityButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                buttonHandler();
                 goToMainScreenSctivity();
             }
         });
         mExitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                buttonHandler();
                 finish();
             }
         });
@@ -109,10 +125,12 @@ public class ResultActivity extends AppCompatActivity {
     //Обновляем текст лучшего результата
     private String setTextForBestResult() {
         if (newBestResult(loadPreferences(BEST_AVERAGE_RESULT), getResult(), BEST_AVERAGE_RESULT)) {
+            mNewRecordSound.start();
             return getText(R.string.best_result_is)
                     + formattedFloat(loadPreferences(BEST_AVERAGE_RESULT))
                     + getText(R.string.sec_for_result);
         } else {
+            mNotNewRecordSound.start();
             return getText(R.string.best_result_is)
                     + formattedDouble(getResult())
                     + getText(R.string.sec_for_result);
@@ -124,5 +142,11 @@ public class ResultActivity extends AppCompatActivity {
         Intent mGoToMainScreenActivity = new Intent(ResultActivity.this, MainScreenActivity.class);
         startActivity(mGoToMainScreenActivity);
         finish();
+    }
+
+    //Реакция кнопки на нажатие
+    private void buttonHandler() {
+        mPressButton.start();
+        mVibrator.vibrate(MainScreenActivity.BUTTON_VIBRATION_DURING);
     }
 }
