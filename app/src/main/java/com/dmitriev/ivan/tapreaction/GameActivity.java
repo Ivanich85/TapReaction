@@ -20,9 +20,9 @@ import java.util.Random;
 public class GameActivity extends AppCompatActivity {
 
     MediaPlayer mTappedMosquito;
-    MediaPlayer mBackgroundSound;
-    MediaPlayer mMosquitoSound;
     MediaPlayer mTimerSound;
+    // MediaPlayer mBackgroundSound;
+    // MediaPlayer mMosquitoSound;
 
     private Button mButton0;
     private Button mButton1;
@@ -55,7 +55,7 @@ public class GameActivity extends AppCompatActivity {
 
     private static final int REMAIN_TIME = 3100;
     private static final int BUTTONS_QUANTITY = 12;
-    private static final int QUANTITY_OF_MOSQUITOS = 3;//Количество комаров
+    private static final int QUANTITY_OF_MOSQUITOS = 4;//Количество комаров
     private static final int VIBRATION_WHEN_TAPPING = 35;//Длительность вибрации в миллисекундах
 
     private static int mClicksCount;
@@ -74,18 +74,12 @@ public class GameActivity extends AppCompatActivity {
         startTimer(REMAIN_TIME);
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        mBackgroundSound.start();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        mBackgroundSound.stop();
-        mMosquitoSound.stop();
-    }
+//    @Override
+//    protected void onStop() {
+//        super.onStop();
+//        mBackgroundSound.stop();
+//        mMosquitoSound.stop();
+//    }
 
     private void initViews() {
         mClicksCount = 0;
@@ -116,10 +110,10 @@ public class GameActivity extends AppCompatActivity {
         mProgressBarText.setTypeface(typeface1);
         mTimer.setTypeface(typeface1);
 
-        mTappedMosquito = MediaPlayer.create(this, R.raw.mosuito_tapped_sound);
-        mBackgroundSound = MediaPlayer.create(this, R.raw.background_sound);
-        mMosquitoSound = MediaPlayer.create(this, R.raw.mosquito_sound);
+        mTappedMosquito = MediaPlayer.create(this, R.raw.mosquito_tapped);
         mTimerSound = MediaPlayer.create(this, R.raw.timer_sound);
+//        mBackgroundSound = MediaPlayer.create(this, R.raw.background_sound);
+//        mMosquitoSound = MediaPlayer.create(this, R.raw.mosquito_sound);
 
         mVibrator = (Vibrator) this.getSystemService(VIBRATOR_SERVICE);
     }
@@ -247,8 +241,8 @@ public class GameActivity extends AppCompatActivity {
             public void onFinish() {
                 mTimer.setText("");
                 showButton();
-                mMosquitoSound.start();
-                mMosquitoSound.isLooping();
+//                mMosquitoSound.start();
+//                mMosquitoSound.isLooping();
             }
         }.start();
     }

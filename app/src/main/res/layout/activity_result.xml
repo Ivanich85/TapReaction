@@ -26,12 +26,13 @@
         android:layout_marginBottom="16dp"/>
 
     <TextView
-        android:id="@+id/new_record_text_view"
+        android:id="@+id/motivation_string_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/green"
         android:textSize="@dimen/current_result_dimen"
-        android:layout_marginBottom="24dp"/>
+        android:layout_marginBottom="24dp"
+        android:gravity="center_horizontal"/>
 
     <Button
         android:id="@+id/main_activity_button"

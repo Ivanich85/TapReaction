@@ -14,12 +14,12 @@
     <string name="main_menu">Go to main menu</string>
     <string name="exit_game">Exit game</string>
     <string name="hunting_licences_remain">"Hunting licences remain: "</string>
-    <string name="new_record">New record!</string>
-    <string name="there_are_no_hunting_license">"You don`t have hunting license more.\nPlease wait "</string>
-    <string name="buy_license">"or buy more licenses"</string>
+    <string name="new_record">Wow! New record!</string>
+    <string name="there_are_no_hunting_license">"You don`t have hunting license more.\nPlease wait a bit or buy more licences"</string>
     <string name="waiting_time">"Waiting time: "</string>
-    <string name="can_play">You can play again!</string>
+    <string name="can_play">You can play!</string>
     <string name="name">Tap a mosquito!</string>
     <string name="slogan">Tap`em all and do it fast! :)</string>
     <string name="tapping_progress">Tapping progress</string>
+    <string name="another_result">You can better!\nTry again and tap`em all!</string>
 </resources>

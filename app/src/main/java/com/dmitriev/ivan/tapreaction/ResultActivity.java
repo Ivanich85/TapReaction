@@ -22,7 +22,7 @@ public class ResultActivity extends AppCompatActivity {
 
     TextView mShowResultTextView;
     TextView mBestResultTextView;
-    TextView mNewRecord;
+    TextView mMotivationStringTextView;
 
     Button mMainActivityButton;
     Button mExitButton;
@@ -42,13 +42,13 @@ public class ResultActivity extends AppCompatActivity {
     private void initViews() {
         mShowResultTextView = (TextView) findViewById(R.id.show_result_text_view);
         mBestResultTextView = (TextView) findViewById(R.id.best_result_text_view);
-        mNewRecord = (TextView) findViewById(R.id.new_record_text_view);
+        mMotivationStringTextView = (TextView) findViewById(R.id.motivation_string_text_view);
 
         Typeface typeface1 = Typeface.createFromAsset(getAssets(), MainScreenActivity.FONT_PATH);
 
         mShowResultTextView.setTypeface(typeface1);
         mBestResultTextView.setTypeface(typeface1);
-        mNewRecord.setTypeface(typeface1);
+        mMotivationStringTextView.setTypeface(typeface1);
 
         mMainActivityButton = (Button) findViewById(R.id.main_activity_button);
         mExitButton = (Button) findViewById(R.id.exit_button);
@@ -115,22 +115,26 @@ public class ResultActivity extends AppCompatActivity {
         if (bestResult != 0.0) {
             if (currentResult <= bestResult) {
                 savePreferences(currentResult, bestAverageResult);
-                mNewRecord.setText(R.string.new_record);
+                mNewRecordSound.start();
+                mMotivationStringTextView.setText(R.string.new_record);
+            } else {
+                mNotNewRecordSound.start();
+                mMotivationStringTextView.setText(R.string.another_result);
             }
             return true;
-        } else savePreferences(currentResult, bestAverageResult);
+        } else {
+            savePreferences(currentResult, bestAverageResult);
+        }
         return false;
     }
 
     //Обновляем текст лучшего результата
     private String setTextForBestResult() {
         if (newBestResult(loadPreferences(BEST_AVERAGE_RESULT), getResult(), BEST_AVERAGE_RESULT)) {
-            mNewRecordSound.start();
             return getText(R.string.best_result_is)
                     + formattedFloat(loadPreferences(BEST_AVERAGE_RESULT))
                     + getText(R.string.sec_for_result);
         } else {
-            mNotNewRecordSound.start();
             return getText(R.string.best_result_is)
                     + formattedDouble(getResult())
                     + getText(R.string.sec_for_result);
@@ -146,7 +150,7 @@ public class ResultActivity extends AppCompatActivity {
 
     //Реакция кнопки на нажатие
     private void buttonHandler() {
-        mPressButton.start();
+        //mPressButton.start();
         mVibrator.vibrate(MainScreenActivity.BUTTON_VIBRATION_DURING);
     }
 }
