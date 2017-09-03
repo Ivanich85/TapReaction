@@ -11,7 +11,7 @@
     <string name="improve_result">"Your result improved by "</string>
     <string name="worse_result">"Your result is worse by "</string>
     <string name="start_game">Start game</string>
-    <string name="main_menu">Go to main menu</string>
+    <string name="main_menu">Main menu</string>
     <string name="exit_game">Exit game</string>
     <string name="hunting_licences_remain">"Hunting licences remain: "</string>
     <string name="new_record">Wow! New record!</string>
@@ -22,4 +22,5 @@
     <string name="slogan">Tap`em all and do it fast! :)</string>
     <string name="tapping_progress">Tapping progress</string>
     <string name="not_new_record">You can better!\nTry again and tap`em all!</string>
+    <string name="try_again_button">Try again</string>
 </resources>

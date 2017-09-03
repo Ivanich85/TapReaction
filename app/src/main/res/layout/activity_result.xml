@@ -7,7 +7,7 @@
     android:gravity="center"
     android:orientation="vertical"
     android:background="@drawable/background_for_result"
-    tools:context="com.dmitriev.ivan.tapmosquito.com.dmitriev.ivan.tapmosquito.ResultActivity">
+    tools:context="com.dmitriev.ivan.tapmosquito.ResultActivity">
 
     <TextView
         android:id="@+id/show_result_text_view"
@@ -35,16 +35,29 @@
         android:gravity="center_horizontal"/>
 
     <Button
-        android:id="@+id/main_activity_button"
+        android:id="@+id/new_game_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@string/try_again_button"
+        android:textAllCaps="false"
+        android:textColor="@color/dark_red"
+        android:textSize="@dimen/new_game_button"
+        android:layout_marginBottom="16dp"
+        android:padding="16dp"
+        android:background="@drawable/button"/>
+
+    <Button
+        android:id="@+id/main_activity_button"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
         android:text="@string/main_menu"
         android:textAllCaps="false"
         android:textColor="@color/dark_red"
         android:textSize="@dimen/best_result_main_menu_dimen"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
         android:padding="16dp"
-        android:background="@drawable/button"/>
+        android:background="@drawable/button"
+        android:visibility="invisible"/>
 
     <Button
         android:id="@+id/exit_button"

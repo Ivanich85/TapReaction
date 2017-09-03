@@ -3,8 +3,9 @@
     <dimen name="timer_dimen">80dp</dimen>
     <dimen name="current_result_dimen">24dp</dimen>
     <dimen name="best_result_dimen">24dp</dimen>
-    <dimen name="app_name_dimen">52dp</dimen>
+    <dimen name="app_name_dimen">48dp</dimen>
     <dimen name="slogan_dimen">24dp</dimen>
+    <dimen name="new_game_button">24dp</dimen>
     <dimen name="best_result_main_menu_dimen">20dp</dimen>
     <dimen name="timer_and_text_main_menu_dimen">16dp</dimen>
 </resources>
