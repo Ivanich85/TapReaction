@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context="com.dmitriev.ivan.tapmosquito.com.dmitriev.ivan.tapmosquito.MainScreenActivity"
+    android:background="@drawable/backround_final">
+
+
+    <TextView
+        android:id="@+id/app_name_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/name"
+        android:textAllCaps="false"
+        android:textColor="@color/red"
+        android:textSize="@dimen/app_name_dimen"
+        android:layout_marginBottom="4dp"/>
+
+    <TextView
+        android:id="@+id/slogan_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:text="@string/slogan"
+        android:textAllCaps="false"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="@dimen/slogan_dimen"/>
+
+    <Button
+        android:id="@+id/start_game_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:text="@string/start_game"
+        android:textAllCaps="false"
+        android:textColor="@color/dark_red"
+        android:textSize="@dimen/best_result_main_menu_dimen"
+        android:padding="12dp"
+        android:background="@drawable/button"/>
+
+    <TextView
+        android:id="@+id/best_result_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:textColor="@color/dark_red"
+        android:textSize="@dimen/best_result_main_menu_dimen"
+        android:gravity="center_horizontal"/>
+
+    <TextView
+        android:id="@+id/hunter_licenses_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:textColor="@color/dark_red"
+        android:textSize="@dimen/timer_and_text_main_menu_dimen"
+        android:gravity="center_horizontal"/>
+
+    <TextView
+        android:id="@+id/remain_time_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:textColor="@color/dark_red"
+        android:textSize="@dimen/timer_and_text_main_menu_dimen"/>
+
+    <Button
+        android:id="@+id/add_licences_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add licenses"
+        android:textAllCaps="false"
+        android:textColor="@color/dark_red"
+        android:textSize="@dimen/best_result_main_menu_dimen"
+        android:visibility="invisible"
+        android:padding="12dp"
+        android:background="@drawable/button"/>
+
+</LinearLayout>

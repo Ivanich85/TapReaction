@@ -1,4 +1,4 @@
-package com.dmitriev.ivan.tapreaction;
+package com.dmitriev.ivan.tapmosquito;
 
 import org.junit.Test;
 

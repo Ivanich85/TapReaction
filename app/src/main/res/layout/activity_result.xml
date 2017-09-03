@@ -7,7 +7,7 @@
     android:gravity="center"
     android:orientation="vertical"
     android:background="@drawable/background_for_result"
-    tools:context="com.dmitriev.ivan.tapreaction.ResultActivity">
+    tools:context="com.dmitriev.ivan.tapmosquito.com.dmitriev.ivan.tapmosquito.ResultActivity">
 
     <TextView
         android:id="@+id/show_result_text_view"
