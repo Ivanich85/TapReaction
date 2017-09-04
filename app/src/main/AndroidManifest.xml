@@ -11,11 +11,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name="com.dmitriev.ivan.tapmosquito.GameActivity">
+        <activity android:name="com.dmitriev.ivan.tapmosquito.GameActivity"
+                  android:screenOrientation="portrait">
         </activity>
-        <activity android:name="com.dmitriev.ivan.tapmosquito.ResultActivity">
+        <activity android:name="com.dmitriev.ivan.tapmosquito.ResultActivity"
+                  android:screenOrientation="portrait">
         </activity>
-        <activity android:name="com.dmitriev.ivan.tapmosquito.MainScreenActivity">
+        <activity android:name="com.dmitriev.ivan.tapmosquito.MainScreenActivity"
+                  android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
