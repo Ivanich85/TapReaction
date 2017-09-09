@@ -3,20 +3,20 @@
     <string name="current_result">"Current result is: "</string>
     <string name="best_result_is">"Best result is: "</string>
     <string name="button_text">Tap!</string>
-    <string name="time_before_start">"00:0"</string>
+    <string name="time_before_start" translatable="false">"00:0"</string>
     <string name="sec_for_result">" sec."</string>
     <string name="min_for_result">" min "</string>
     <string name="hours_for_result">" h "</string>
     <string name="no_best_result">There is no best result enough\nBut why you don`t change it? </string>/>
     <string name="improve_result">"Your result improved by "</string>
-    <string name="worse_result">"Your result is worse by "</string>
+    <string name="worse_result" translatable="false">"Your result is worse by "</string>
     <string name="start_game">Start game</string>
     <string name="main_menu">Main menu</string>
     <string name="exit_game">Exit game</string>
     <string name="hunting_licences_remain">"Hunting licences remain: "</string>
     <string name="new_record">Wow! New record!</string>
-    <string name="there_are_no_hunting_license">"You don`t have hunting license more.\nPlease wait a bit or buy more licences"</string>
-    <string name="waiting_time">"Waiting time: "</string>
+    <string name="there_are_no_hunting_license" translatable="false">"You don`t have hunting license more.\nPlease wait a bit or buy more licences"</string>
+    <string name="waiting_time" translatable="false">"Waiting time: "</string>
     <string name="can_play">You can play!</string>
     <string name="name">Tap a mosquito!</string>
     <string name="slogan">Tap`em all and do it fast! :)</string>
