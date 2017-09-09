@@ -18,9 +18,9 @@
     <string name="there_are_no_hunting_license" translatable="false">"You don`t have hunting license more.\nPlease wait a bit or buy more licences"</string>
     <string name="waiting_time" translatable="false">"Waiting time: "</string>
     <string name="can_play">You can play!</string>
-    <string name="name">Tap a mosquito!</string>
-    <string name="slogan">Tap`em all and do it fast! :)</string>
-    <string name="tapping_progress">Tapping progress</string>
+    <string name="name">Slam a mosquito!</string>
+    <string name="slogan">Slam`em all and do it fast! :)</string>
+    <string name="tapping_progress">Slamming progress</string>
     <string name="not_new_record">You can better!\nTry again and tap`em all!</string>
     <string name="try_again_button">Try again</string>
 </resources>
