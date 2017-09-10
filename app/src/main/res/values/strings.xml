@@ -2,7 +2,7 @@
     <string name="app_name">Slam a mosquito!</string>
     <string name="current_result">"Current result is: "</string>
     <string name="best_result_is">"Best result is: "</string>
-    <string name="button_text">Tap!</string>
+    <string name="button_text">Slam!</string>
     <string name="time_before_start" translatable="false">"00:0"</string>
     <string name="sec_for_result">" sec."</string>
     <string name="min_for_result">" min "</string>
@@ -21,7 +21,7 @@
     <string name="name">Slam a mosquito!</string>
     <string name="slogan">Slam`em all and do it fast! :)</string>
     <string name="tapping_progress">Slamming progress</string>
-    <string name="not_new_record">You can better!\nTry again and tap`em all!</string>
+    <string name="not_new_record">You can better!\nTry again and slam`em all!</string>
     <string name="try_again_button">Try again</string>
     <string name="could_you_rate_app">If you enjoy using this app, please take a moment to rate it. Thanks for your support!</string>
 </resources>
