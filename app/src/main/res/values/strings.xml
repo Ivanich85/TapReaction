@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TapMosquito</string>
+    <string name="app_name">Slam a mosquito!</string>
     <string name="current_result">"Current result is: "</string>
     <string name="best_result_is">"Best result is: "</string>
     <string name="button_text">Tap!</string>
@@ -23,4 +23,5 @@
     <string name="tapping_progress">Slamming progress</string>
     <string name="not_new_record">You can better!\nTry again and tap`em all!</string>
     <string name="try_again_button">Try again</string>
+    <string name="could_you_rate_app">If you enjoy using this app, please take a moment to rate it. Thanks for your support!</string>
 </resources>
