@@ -24,5 +24,6 @@
     <string name="not_new_record">You can better!\nTry again and slam`em all!</string>
     <string name="try_again_button">Try again</string>
     <string name="could_you_rate_app">If you enjoy using this app, please take a moment to rate it. Thanks for your support!</string>
-    <string name="sound_switch_text">Sounds</string>
+    <string name="sound_on">Sound on</string>
+    <string name="sound_off">Sound off</string>
 </resources>

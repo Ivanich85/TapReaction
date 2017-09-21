@@ -42,22 +42,21 @@
         android:textAllCaps="false"
         android:textColor="@color/dark_red"
         android:textSize="@dimen/new_game_button"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="24dp"
         android:padding="16dp"
         android:background="@drawable/button"/>
 
     <Button
         android:id="@+id/main_activity_button"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:text="@string/main_menu"
         android:textAllCaps="false"
         android:textColor="@color/dark_red"
         android:textSize="@dimen/best_result_main_menu_dimen"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="24dp"
         android:padding="16dp"
-        android:background="@drawable/button"
-        android:visibility="invisible"/>
+        android:background="@drawable/button"/>
 
     <Button
         android:id="@+id/exit_button"
@@ -67,7 +66,6 @@
         android:textAllCaps="false"
         android:textColor="@color/dark_red"
         android:textSize="@dimen/best_result_main_menu_dimen"
-        android:layout_marginBottom="40dp"
         android:padding="16dp"
         android:background="@drawable/button"/>
 

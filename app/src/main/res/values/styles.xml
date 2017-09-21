@@ -8,4 +8,15 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="MySwitch" parent="Theme.AppCompat.Light">
+        <!-- активное состояние (30% прозрачности для фона) -->
+        <item name="colorControlActivated">#2b0000</item>
+
+        <!-- неактивное состояние ползунка -->
+        <item name="colorSwitchThumbNormal">#2b0000</item>
+
+        <!-- цвет дорожки для неактивного состояния -->
+        <item name="android:colorForeground">#be52c67a</item>
+    </style>
+
 </resources>
