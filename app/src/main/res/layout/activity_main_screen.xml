@@ -10,6 +10,7 @@
     android:background="@drawable/backround_final">
 
 
+
     <TextView
         android:id="@+id/app_name_text_view"
         android:layout_width="wrap_content"
@@ -35,7 +36,7 @@
         android:id="@+id/start_game_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="8dp"
         android:text="@string/start_game"
         android:textAllCaps="false"
         android:textColor="@color/dark_red"
@@ -47,7 +48,7 @@
         android:id="@+id/best_result_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="8dp"
         android:textColor="@color/dark_red"
         android:textSize="@dimen/best_result_main_menu_dimen"
         android:gravity="center_horizontal"/>
@@ -65,7 +66,7 @@
         android:id="@+id/remain_time_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="8dp"
         android:textColor="@color/dark_red"
         android:textSize="@dimen/timer_and_text_main_menu_dimen"/>
 
@@ -80,5 +81,20 @@
         android:visibility="invisible"
         android:padding="12dp"
         android:background="@drawable/button"/>
+
+    <TextView
+        android:id="@+id/switch_on_off_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:textColor="@color/dark_red"
+        android:textSize="@dimen/timer_and_text_main_menu_dimen"/>
+
+    <Switch
+        android:id="@+id/sound_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:shadowColor="#4985ff80"
+        android:checked="true"/>
 
 </LinearLayout>
