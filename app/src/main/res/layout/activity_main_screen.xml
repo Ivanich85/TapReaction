@@ -8,7 +8,7 @@
     android:gravity="center"
     android:orientation="vertical"
     tools:context="com.dmitriev.ivan.tapmosquito.MainScreenActivity"
-    android:background="@drawable/backround_final">
+    android:background="@drawable/background_final">
 
     <TextView
         android:id="@+id/app_name_text_view"
